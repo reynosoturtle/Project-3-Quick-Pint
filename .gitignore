@@ -25,3 +25,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+#Ignore the Gemfile.lock (if you are having trouble with 'bundle install', delete this file)
+Gemfile.lock
+
