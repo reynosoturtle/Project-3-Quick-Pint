@@ -25,6 +25,14 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 
+gem 'bootstrap-sass'
+
+gem 'bootstrap', '~> 4.1.0'
+
+gem 'jquery-rails'
+
+gem 'jquery-turbolinks'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
