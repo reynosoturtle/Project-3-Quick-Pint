@@ -7,13 +7,29 @@
 
 <p>
   <strong>Business hours:</strong>
-  <%= @bar.business_hours %>
+  <%= @bar.hours %>
 </p>
 
 <p>
   <strong>Images:</strong>
-  <%= @bar.images %>
+  <img src = "<%= @bar.images %>"/>
 </p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @bar.phone %>
+</p>
+
+<p>
+  <strong>Type (Ambience/Genre):</strong>
+  <%= @bar.type_id.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @bar.address %>
+</p>
+
 
 <%= link_to 'Edit', edit_bar_path(@bar) %> |
 <%= link_to 'Back', bars_path %>

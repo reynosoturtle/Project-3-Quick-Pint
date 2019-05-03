@@ -1,6 +1,6 @@
-class Type < ActiveRecord::Migration[5.2]
+class Genre < ActiveRecord::Migration[5.2]
   def change
-    create_table :types do |t|
+    create_table :genres do |t|
       t.string :name
     end
   end

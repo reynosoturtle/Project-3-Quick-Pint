@@ -6,22 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Type.destroy_all #We delete all entries for type first before we create new types when seed file is run
+Genre.destroy_all #We delete all entries for type first before we create new types when seed file is run
 
-Type.create(name: 'Bar')  #1
-Type.create(name: 'Club')   #2
-Type.create(name: 'Fine Dining')  #3
-Type.create(name: 'Café/Bistro')  #4
-Type.create(name: 'Restaurant')  #5
-Type.create(name: 'Air-conditioned')  #6
-Type.create(name: 'Smoking Allowed')  #7
-Type.create(name: 'Large Groups')   #8
-Type.create(name: 'Family-friendly')   #9
-Type.create(name: 'Live Band')  #10
-Type.create(name: 'Karaoke')   #11
-Type.create(name: 'Background Music')  #12
+Genre.create(name: 'Bar')  #1
+Genre.create(name: 'Club')   #2
+Genre.create(name: 'Fine Dining')  #3
+Genre.create(name: 'Café/Bistro')  #4
+Genre.create(name: 'Restaurant')  #5
+Genre.create(name: 'Air-conditioned')  #6
+Genre.create(name: 'Smoking Allowed')  #7
+Genre.create(name: 'Large Groups')   #8
+Genre.create(name: 'Family-friendly')   #9
+Genre.create(name: 'Live Band')  #10
+Genre.create(name: 'Karaoke')   #11
+Genre.create(name: 'Background Music')  #12
 
-P "SEEDED type data"
+P "SEEDED genre data"
 
 Bar.destroy_all # delete all entries in bar table first before creating anything new
 

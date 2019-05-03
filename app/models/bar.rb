@@ -1,3 +1,3 @@
 class Bar < ApplicationRecord
-  belongs_to :type
+  belongs_to :genre
 end

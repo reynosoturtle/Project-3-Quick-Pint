@@ -5,7 +5,7 @@ class CreateBars < ActiveRecord::Migration[5.2]
       t.string :business_hour
       t.string :image
       t.string :address
-      t.references :type
+      t.references :genre
 
       t.timestamps
     end

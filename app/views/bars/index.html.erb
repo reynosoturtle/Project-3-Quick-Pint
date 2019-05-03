@@ -26,9 +26,12 @@
 				<td><%= bar.type_id.name %></td>
 				<td><%= bar.address %></td>
 
-        <td><%= link_to 'Show', bar %></td>
+        <td><%= link_to 'Show', bar_path(bar) %></td>
         <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
-        <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', bar_path(bar),
+								method: :delete,
+								data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>
