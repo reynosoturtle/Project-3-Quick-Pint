@@ -6,27 +6,27 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Genre.destroy_all #We delete all entries for type first before we create new types when seed file is run
+Type.destroy_all #We delete all entries for type first before we create new types when seed file is run
 
-Genre.create(name: 'Bar')  #1
-Genre.create(name: 'Club')   #2
-Genre.create(name: 'Fine Dining')  #3
-Genre.create(name: 'Café/Bistro')  #4
-Genre.create(name: 'Restaurant')  #5
-Genre.create(name: 'Air-conditioned')  #6
-Genre.create(name: 'Smoking Allowed')  #7
-Genre.create(name: 'Large Groups')   #8
-Genre.create(name: 'Family-friendly')   #9
-Genre.create(name: 'Live Band')  #10
-Genre.create(name: 'Karaoke')   #11
-Genre.create(name: 'Background Music')  #12
+Type.create(name: 'Bar')  #1
+Type.create(name: 'Club')   #2
+Type.create(name: 'Fine Dining')  #3
+Type.create(name: 'Café/Bistro')  #4
+Type.create(name: 'Restaurant')  #5
+Type.create(name: 'Air-conditioned')  #6
+Type.create(name: 'Smoking Allowed')  #7
+Type.create(name: 'Large Groups')   #8
+Type.create(name: 'Family-friendly')   #9
+Type.create(name: 'Live Band')  #10
+Type.create(name: 'Karaoke')   #11
+Type.create(name: 'Background Music')  #12
 
-P "SEEDED genre data"
+p "SEEDED type data"
 
 Bar.destroy_all # delete all entries in bar table first before creating anything new
 
 Bar.create(name: 'OverEasy',
-          hours: ['1000-2200',
+          business_hour: ['1000-2200',
                   '1500-2300',
                   '1500-2300',
                   '1500-2300',
@@ -39,7 +39,7 @@ Bar.create(name: 'OverEasy',
                   address: '541 Orchard Rd, #01-01 Liat Towers, Singapore 238881')
 
 Bar.create(name: 'OverDifficult',
-          hours: ['1000-2200',
+          business_hour: ['1000-2200',
                   '1500-2300',
                   '1500-2300',
                   '1500-2300',
@@ -51,5 +51,5 @@ Bar.create(name: 'OverDifficult',
                   type_id: '2',
                   address: '1 Fullerton Rd, #01-06, Singapore 049213')
 
-P "SEEDED bar data"
+p "SEEDED bar data"
 
