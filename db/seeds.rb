@@ -8,19 +8,48 @@
 
 Type.destroy_all #We delete all entries for type first before we create new types when seed file is run
 
-Type.create(name: 'Bar')
-Type.create(name: 'Club')
-Type.create(name: 'Fine Dining')
-Type.create(name: 'Café/Bistro')
-Type.create(name: 'Restaurant')
-
-Type.create(name: 'Air-conditioned')
-Type.create(name: 'Smoking Allowed')
-Type.create(name: 'Large Groups')
-Type.create(name: 'Family-friendly')
-
-Type.create(name: 'Live Band')
-Type.create(name: 'Karaoke')
-Type.create(name: 'Background Music')
+Type.create(name: 'Bar')  #1
+Type.create(name: 'Club')   #2
+Type.create(name: 'Fine Dining')  #3
+Type.create(name: 'Café/Bistro')  #4
+Type.create(name: 'Restaurant')  #5
+Type.create(name: 'Air-conditioned')  #6
+Type.create(name: 'Smoking Allowed')  #7
+Type.create(name: 'Large Groups')   #8
+Type.create(name: 'Family-friendly')   #9
+Type.create(name: 'Live Band')  #10
+Type.create(name: 'Karaoke')   #11
+Type.create(name: 'Background Music')  #12
 
 P "SEEDED type data"
+
+Bar.destroy_all # delete all entries in bar table first before creating anything new
+
+Bar.create(name: 'OverEasy',
+          hours: ['1000-2200',
+                  '1500-2300',
+                  '1500-2300',
+                  '1500-2300',
+                  '1500-2300',
+                  '1200-0100',
+                  '1000-0000'],
+                  image: 'https://media-cdn.tripadvisor.com/media/photo-s/0a/b0/e2/66/overeasy-alfresco.jpg',
+                  phone: '66841453',
+                  type_id: '1'
+                  address: '541 Orchard Rd, #01-01 Liat Towers, Singapore 238881')
+
+Bar.create(name: 'OverDifficult',
+          hours: ['1000-2200',
+                  '1500-2300',
+                  '1500-2300',
+                  '1500-2300',
+                  '1500-2300',
+                  '1200-0100',
+                  '1000-0000'],
+                  image: 'https://media-cdn.tripadvisor.com/media/photo-s/12/9d/7c/7a/overeasy-fullerton.jpg',
+                  phone: '66841453',
+                  type_id: '2'
+                  address: '1 Fullerton Rd, #01-06, Singapore 049213')
+
+P "SEEDED bar data"
+
