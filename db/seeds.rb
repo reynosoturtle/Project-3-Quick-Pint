@@ -35,7 +35,7 @@ Bar.create(name: 'OverEasy',
                   '1000-0000'],
                   image: 'https://media-cdn.tripadvisor.com/media/photo-s/0a/b0/e2/66/overeasy-alfresco.jpg',
                   phone: '66841453',
-                  type_id: '1'
+                  type_id: '1',
                   address: '541 Orchard Rd, #01-01 Liat Towers, Singapore 238881')
 
 Bar.create(name: 'OverDifficult',
@@ -48,7 +48,7 @@ Bar.create(name: 'OverDifficult',
                   '1000-0000'],
                   image: 'https://media-cdn.tripadvisor.com/media/photo-s/12/9d/7c/7a/overeasy-fullerton.jpg',
                   phone: '66841453',
-                  type_id: '2'
+                  type_id: '2',
                   address: '1 Fullerton Rd, #01-06, Singapore 049213')
 
 P "SEEDED bar data"
