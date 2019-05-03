@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Type.destroy_all #We delete all entries for type first before we create new types when seed file is run
+Type.delete_all #We delete all entries for type first before we create new types when seed file is run
 
 Type.create(name: 'Bar')  #1
 Type.create(name: 'Club')   #2
