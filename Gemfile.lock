@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/jonhue/acts_as_favoritor.git
+  revision: 194e18e46f2a057c7e0cf93d15e7eeaebff600cc
+  specs:
+    acts_as_favoritor (2.1.1)
+      activerecord (~> 5.2)
+
+GIT
   remote: https://github.com/stympy/faker.git
   revision: cc9f09e287fea252339c485046fe99a9ff41df07
   branch: master
@@ -229,6 +236,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_favoritor!
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
