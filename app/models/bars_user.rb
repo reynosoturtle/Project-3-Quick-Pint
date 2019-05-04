@@ -1,2 +1,0 @@
-class BarsUser < ApplicationRecord
-end

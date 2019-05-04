@@ -2,6 +2,17 @@
 
 <h1>Bars</h1>
 
+<!-- Checks if user is a bar owner -->
+<% if user_signed_in? && current_user.role.downcase == 'owner' %>
+  <%= link_to 'New Bar', new_bar_path %>
+<% end %>
+<!-- Normal User -->
+<% if user_signed_in? %>
+  <%= link_to 'Log Out', destroy_user_session_url, method: :delete %>
+  <% else %>
+  <%= link_to 'Log In', new_user_session_url %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -16,16 +27,19 @@
     <% @bars.each do |bar| %>
       <tr>
         <td><%= bar.name %></td>
-        <td><%= bar.business_hours %></td>
-        <td><%= bar.images %></td>
+        <td><%= bar.opening_hour %></td>
+        <td><%= bar.closing_hour %></td>
+        <td><%= bar.image %></td>
         <td><%= link_to 'Show', bar %></td>
-        <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
-        <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- Checks if user is owner of bar -->
+        <% if user_signed_in? && current_user.id == bar.owner_id %>
+          <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
+          <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Bar', new_bar_path %>
