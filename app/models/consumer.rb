@@ -1,2 +1,0 @@
-class Consumer < User
-end
