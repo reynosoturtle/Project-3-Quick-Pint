@@ -1,10 +1,12 @@
 class BarsController < ApplicationController
-  before_action :set_bar, only: [:show, :edit, :update, :destroy]
+  # before_action :set_bar, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :except => [ :show, :index ]
 
   # GET /bars
   # GET /bars.json
   def index
     @bars = Bar.all
+    @users = User.all
   end
 
   # GET /bars/1
@@ -28,7 +30,7 @@ class BarsController < ApplicationController
 
     respond_to do |format|
       if @bar.save
-        format.html { redirect_to @bar, notice: 'Bar was successfully created.' }
+        format.html { redirect_to @bar, notice: "Bar was successfully created." }
         format.json { render :show, status: :created, location: @bar }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class BarsController < ApplicationController
   def update
     respond_to do |format|
       if @bar.update(bar_params)
-        format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
+        format.html { redirect_to @bar, notice: "Bar was successfully updated." }
         format.json { render :show, status: :ok, location: @bar }
       else
         format.html { render :edit }
@@ -56,19 +58,20 @@ class BarsController < ApplicationController
   def destroy
     @bar.destroy
     respond_to do |format|
-      format.html { redirect_to bars_url, notice: 'Bar was successfully destroyed.' }
+      format.html { redirect_to bars_url, notice: "Bar was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bar
-      @bar = Bar.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def bar_params
-      params.require(:bar).permit(:name, :business_hours, :images)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bar
+    @bar = Bar.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def bar_params
+    params.require(:bar).permit(:name, :opening_hour, :closing_hour, :image, :address, :category, :owner_id)
+  end
 end
