@@ -7,13 +7,25 @@
 
 <p>
   <strong>Business hours:</strong>
-  <%= @bar.business_hours %>
+  <%= @bar.opening_hour %><br>
+	<%= @bar.closing_hour %><br>
 </p>
 
 <p>
-  <strong>Images:</strong>
-  <%= @bar.images %>
+  <strong>Bar Image:</strong>
+  <%= @bar.image %>
 </p>
 
-<%= link_to 'Edit', edit_bar_path(@bar) %> |
-<%= link_to 'Back', bars_path %>
+<p>
+  <strong>Bar Address:</strong>
+  <%= @bar.address %>
+</p>
+
+<p>
+  <strong>Type of Bar:</strong>
+  <%= @bar.category %>
+</p>
+
+
+<%= link_to 'Edit', edit_bar_path(@bar), class: 'btn btn-primary' %> |
+<%= link_to 'Back', bars_path, class: 'btn btn-secondary' %>

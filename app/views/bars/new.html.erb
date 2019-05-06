@@ -1,5 +1,43 @@
 <h1>New Bar</h1>
 
-<%= render 'form', bar: @bar %>
+<%= form_with scope: :bar, url: bars_path, local: true do |form| %>
+  <p>
+    <%= form.label :name, 'Bar Name' %><br>
+    <% if params[:bar] != nil %>
+    	<%= form.text_field :name, :value => params[:bar][:name]%>
+    <% else %>
+    	<%= form.text_field :name %>
+    <% end %>
+  </p>
+
+	<p>
+    <%= form.label :opening_hour, 'Business Opening Hour' %><br>
+    <%= form.number_field :opening_hour%>
+  </p>
+
+	<p>
+    <%= form.label :closing_hour, 'Business Closing Hour' %><br>
+    <%= form.number_field :closing_hour %>
+  </p>
+
+	<p>
+    <%= form.label :image, 'Upload Bar Image' %><br>
+    <%= form.text_field :image %>
+  </p>
+
+	<p>
+    <%= form.label :address, 'Bar Address' %><br>
+    <%= form.text_field :address %>
+  </p>
+
+	<p>
+    <%= form.label :category, 'Type of Bar' %><br>
+    <%= form.text_field :category %>
+  </p>
+
+	<p>
+    <%= form.submit %>
+  </p>
+<% end %>
 
 <%= link_to 'Back', bars_path %>
