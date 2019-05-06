@@ -23,6 +23,7 @@ class BarsController < ApplicationController
 
   # GET /bars/1/edit
   def edit
+    @bar = Bar.find(params[:id])
   end
 
   # POST /bars
