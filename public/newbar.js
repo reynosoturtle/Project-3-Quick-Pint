@@ -20,7 +20,7 @@ function initMap() {
 }
 
 function handlePlaceChanged() {
-    infowindow.close();
+    // infowindow.close();
     const place = autoComplete.getPlace();
     // console.log('place', place);
     const lat = autoComplete.getPlace().geometry.location.lat();
@@ -38,9 +38,19 @@ function handlePlaceChanged() {
 
     var marker = new google.maps.Marker({
         position: myLatLng,
-        title: "Hello World!"
+        title: place.name
     });
 
     marker.setMap(map);
+
+    var contentString = '<strong>' + place.name + '</strong>' + '<div>Rating: ' + place.rating + ', ' + place.user_ratings_total + ' Google reviews</div>' + '</div>' + '<div>' + place.international_phone_number + '</div>'
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString,
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
+    });
 
 };

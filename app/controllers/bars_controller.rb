@@ -70,7 +70,7 @@ class BarsController < ApplicationController
     @bar = Bar.find(params[:id])
   end
 
-  def confirm_create
+  def newbar
 
   end
 
