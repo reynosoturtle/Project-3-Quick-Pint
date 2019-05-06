@@ -12,9 +12,20 @@
 </p>
 
 <p>
-  <strong>Images:</strong>
+  <strong>Bar Image:</strong>
   <%= @bar.image %>
 </p>
+
+<p>
+  <strong>Bar Address:</strong>
+  <%= @bar.address %>
+</p>
+
+<p>
+  <strong>Type of Bar:</strong>
+  <%= @bar.category %>
+</p>
+
 
 <%= link_to 'Edit', edit_bar_path(@bar) %> |
 <%= link_to 'Back', bars_path %>
