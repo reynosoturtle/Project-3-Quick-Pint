@@ -70,6 +70,10 @@ class BarsController < ApplicationController
     @bar = Bar.find(params[:id])
   end
 
+  def confirm_create
+
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def bar_params
     params.require(:bar).permit(:name, :opening_hour, :closing_hour, :image, :address, :category, :owner_id)
