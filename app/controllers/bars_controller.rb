@@ -30,22 +30,27 @@ class BarsController < ApplicationController
   # POST /bars.json
   def create
     @bar = Bar.new(bar_params)
+    p @bar
+    @bar.save
+    # @bar.save == true
+    redirect_to @bar
 
-    respond_to do |format|
-      if @bar.save
-        format.html { redirect_to @bar, notice: "Bar was successfully created." }
-        format.json { render :show, status: :created, location: @bar }
-      else
-        format.html { render :new }
-        format.json { render json: @bar.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @bar.save
+    #     format.html { redirect_to @bar, notice: "Bar was successfully created." }
+    #     format.json { render :show, status: :created, location: @bar }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @bar.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /bars/1
   # PATCH/PUT /bars/1.json
   def update
     respond_to do |format|
+      @bar = Bar.find(params[:id])
       if @bar.update(bar_params)
         format.html { redirect_to @bar, notice: "Bar was successfully updated." }
         format.json { render :show, status: :ok, location: @bar }
@@ -59,6 +64,7 @@ class BarsController < ApplicationController
   # DELETE /bars/1
   # DELETE /bars/1.json
   def destroy
+    @bar = Bar.find(params[:id])
     @bar.destroy
     respond_to do |format|
       format.html { redirect_to bars_url, notice: "Bar was successfully destroyed." }
@@ -75,6 +81,7 @@ class BarsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bar_params
-    params.require(:bar).permit(:name, :opening_hour, :closing_hour, :image, :address, :category, :owner_id)
+    # params.require(:bar).permit(:name, :opening_hour, :closing_hour, :image, :address, :category, :owner_id)
+    params.require(:bar).permit(:name, :address, :category, :opening_hour, :closing_hour, :image)
   end
 end
