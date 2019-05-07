@@ -12,11 +12,10 @@
   <div class="field">
     Register as a/an:<br><br>
 
-    <%= f.radio_button(:role, "customer", :checked => 'checked', :style => 'display: inline;') %>
-    <%= label(:role_customer, "Customer", :style => 'display: inline;') %>
+    <%= f.label :type %>
     <br>
-    <%= f.radio_button(:role, "owner", :style => 'display: inline;') %>
-    <%= label(:role_owner, "Owner", :style => 'display: inline;') %>
+    <%= f.select :type, options_for_select(%w[Customer Owner]) %></div>
+    <%# options_for_select is a command that gives a drop down for cus and owners allows control which type %>
   </div>
 
   <div class="field">

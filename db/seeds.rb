@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -26,15 +28,14 @@
 20.times do
   o = Owner.create(email: Faker::Internet.email,
                    name: Faker::Name.name,
-                   password: "legend",
-                   role: "owner")
+                   password: 'legend')
   5.times do
     o.bars.create(name: Faker::Restaurant.name,
                   category: Faker::Restaurant.type,
                   address: Faker::Address.street_address,
-                  opening_hour: "0930",
-                  closing_hour: "2200")
+                  opening_hour: '0930',
+                  closing_hour: '2200')
   end
 end
 
-puts "SEEDED type data"
+puts 'SEEDED type data'
