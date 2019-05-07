@@ -31,6 +31,9 @@ class BarsController < ApplicationController
   # POST /bars.json
   def create
     @bar = Bar.new(bar_params)
+    uploaded_file = params[:bar][:picture].path
+    cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
+    @bar.attributes = {:image => cloudinary_file["public_id"]}
     p @bar
     @bar.save
     # @bar.save == true
