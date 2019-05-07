@@ -26,6 +26,8 @@ class BarsController < ApplicationController
   # GET /bars/1/edit
   def edit
     @bar = Bar.find(params[:id])
+    @categories = Category.all
+    @owners = Owner.all
   end
 
   # POST /bars
