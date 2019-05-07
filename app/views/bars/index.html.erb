@@ -28,7 +28,13 @@
       <tr>
         <td><%= bar.name %></td>
         <td><%= bar.business_hours %></td>
-        <td><%= bar.image %></td>
+        <td>
+					<% if bar.image == nil %>
+						<%= '' %>
+					<% else %>
+						<%= cl_image_tag(bar.image) %>
+					<% end %>
+				</td>
         <td><%= link_to 'Show', bar %>|</td>
         <!-- Checks if user is owner of bar -->
         <% if user_signed_in? && current_user.id == bar.owner_id %>

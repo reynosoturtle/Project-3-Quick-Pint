@@ -12,17 +12,16 @@
 
 <p>
   <strong>Bar Image:</strong><br>
-	<%= cl_image_tag(@bar.image) %>
+		<% if @bar.image == nil %>
+			<%= '' %>
+		<% else %>
+			<%= cl_image_tag(@bar.image) %>
+		<% end %>
 </p>
 
 <p>
   <strong>Bar Address:</strong>
   <%= @bar.address %>
-</p>
-
-<p>
-  <strong>Category (dummy):</strong>
-  <%= @bar.category %>
 </p>
 
 <p>
@@ -46,12 +45,12 @@
 </p>
 
 <p>
-  <strong>Bar Category (somehow this data SEO can't seem to make it appear):</strong>
-
+  <strong>Bar Category (can't seem to make it appear as a word):</strong><br>
+	<%= @bar.category_id %>
 </p>
 
 <p>
-  <strong>Name of Owner:</strong>
+  <strong>Name of Owner:</strong><br>
   <%= @bar.owner.name %>
 </p>
 
