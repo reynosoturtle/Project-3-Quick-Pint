@@ -11,18 +11,13 @@
   </p>
 
 	<p>
-    <%= form.label :opening_hour, 'Business Opening Hour' %><br>
-    <%= form.time_field :opening_hour%>
-  </p>
-
-	<p>
-    <%= form.label :closing_hour, 'Business Closing Hour' %><br>
-    <%= form.time_field :closing_hour %>
+    <%= form.label :business_hours, 'Business Hours' %><br>
+    <%= form.text_field :business_hours%>
   </p>
 
 	<p>
     <%= form.label :image, 'Upload Bar Image' %><br>
-    <%= form.text_field :image %>
+    <%= form.file_field :image %>
   </p>
 
 	<p>
@@ -31,8 +26,8 @@
   </p>
 
 	<p>
-    <%= form.label :category, 'Type of Bar' %><br>
-    <%= form.text_field :category %>
+    <%= form.label :category_id, 'Type of Bar' %><br>
+    <%= form.collection_select :category_id, @categories, :id, :name %>
   </p>
 
 	<p>

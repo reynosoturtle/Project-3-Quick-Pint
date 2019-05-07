@@ -19,6 +19,7 @@ class BarsController < ApplicationController
   # GET /bars/new
   def new
     @bar = Bar.new
+    @categories = Category.all
   end
 
   # GET /bars/1/edit

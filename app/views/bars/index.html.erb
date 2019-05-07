@@ -27,8 +27,7 @@
     <% @bars.each do |bar| %>
       <tr>
         <td><%= bar.name %></td>
-        <td><%= bar.opening_hour %></td>
-        <td><%= bar.closing_hour %></td>
+        <td><%= bar.business_hours %></td>
         <td><%= bar.image %></td>
         <td><%= link_to 'Show', bar %></td>
         <!-- Checks if user is owner of bar -->
