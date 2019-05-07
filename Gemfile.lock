@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/jonhue/acts_as_favoritor.git
-  revision: 194e18e46f2a057c7e0cf93d15e7eeaebff600cc
+  revision: d0ec13f68523b1bd9f2c3aae43fc5a4f1a2de233
   specs:
-    acts_as_favoritor (2.1.1)
-      activerecord (~> 5.2)
+    acts_as_favoritor (4.0.0)
+      activerecord (>= 5.0)
 
 GIT
   remote: https://github.com/stympy/faker.git
@@ -86,6 +86,7 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     devise (4.6.2)
@@ -102,6 +103,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    interception (0.5)
     io-like (0.3.0)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
@@ -132,6 +134,14 @@ GEM
       equatable (~> 0.5.0)
       tty-color (~> 0.4.0)
     pg (1.1.4)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
+    pry-rescue (1.5.0)
+      interception (>= 0.5)
+      pry (>= 0.12.0)
     public_suffix (3.0.3)
     puma (3.12.1)
     rack (2.0.7)
@@ -246,6 +256,8 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
+  pry-rails
+  pry-rescue
   puma (~> 3.11)
   rails (~> 5.2.3)
   sass-rails (~> 5.0)
