@@ -4,14 +4,20 @@ var infowindow;
 var autoComplete;
 var marker;
 
+//initialize map
 function initMap() {
+
+    //show singapore on map
     var Singapore = new google.maps.LatLng(1.3521, 103.8198);
 
+    //create infowindow
     infowindow = new google.maps.InfoWindow();
 
+    //positioning of map
     map = new google.maps.Map(
         document.getElementById('map'), { center: Singapore, zoom: 11 });
 
+    //adding auto completion stuff
     autoComplete = new google.maps.places.Autocomplete(document.querySelector('input'));
 
     autoComplete.bindTo('bounds', map);
@@ -19,23 +25,39 @@ function initMap() {
     autoComplete.addListener('place_changed', handlePlaceChanged);
 }
 
+//when place_changed is executed, run this
 function handlePlaceChanged() {
-    // infowindow.close();
+
+    //getPlace gives me the details from google of the location in the autocomplete field
     const place = autoComplete.getPlace();
     // console.log('place', place);
-    const lat = autoComplete.getPlace().geometry.location.lat();
-    const long = autoComplete.getPlace().geometry.location.lng();
+
+    //save the lat long to place the marker later on
+    const lat = place.geometry.location.lat();
+    const long = place.geometry.location.lng();
     const myLatLng = new google.maps.LatLng(lat, long);
 
+    //input the data retrieved from google into the text fields
     document.getElementById("name").value = place.name;
     document.getElementById("address").value = place.formatted_address;
-    document.getElementById("business_hour").value = place.opening_hours.weekday_text;
+    //saving these to db because we need them for map markers (these will hidden fields on views)
+    document.getElementById("lat").value = lat;
+    document.getElementById("long").value = long;
+    document.getElementById("place_id").value = place.place_id;
 
-    // const hoursArray = place.opening_hours.weekday_text
-    // hoursArray.forEach(function(day) {
-    //     console.log(day);
-    // });
+    //business hours data returned from api is an array
+    //put each array item inside an individual text field
+    let bizHourContainer = document.getElementById("hours");
 
+    const hoursArray = place.opening_hours.weekday_text
+    hoursArray.forEach(function(day) {
+        let newInput = document.createElement("input");
+        newInput.value = day;
+        newInput.name = "business_hour";
+        bizHourContainer.appendChild(newInput);
+    });
+
+    //adding the marker with latlong
     var marker = new google.maps.Marker({
         position: myLatLng,
         title: place.name
@@ -43,14 +65,15 @@ function handlePlaceChanged() {
 
     marker.setMap(map);
 
+    //text to show inside the marker infoview
     var contentString = '<strong>' + place.name + '</strong>' + '<div>Rating: ' + place.rating + ', ' + place.user_ratings_total + ' Google reviews</div>' + '</div>' + '<div>' + place.international_phone_number + '</div>'
 
     var infowindow = new google.maps.InfoWindow({
         content: contentString,
     });
 
+    //show the infoview when clicked
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.open(map,marker);
     });
-
 };
