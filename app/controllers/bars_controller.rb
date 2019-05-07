@@ -2,14 +2,16 @@
 
 class BarsController < ApplicationController
   #doing the set bar allows it to universally adopt the private properties for the crud + fav for the setbar.
-  before_action :set_bar, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :set_bar, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite]
   before_action :authenticate_user!, except: [:show, :index]
 
   # GET /bars
   # GET /bars.json
   def index
-    @bars = Bar.all
+    @bars = Bar.order(created_at: :desc)
     @users = User.all
+    @page_title = 'Bars'
+    #make the header dynamic
   end
 
   # GET /bars/1
@@ -70,6 +72,13 @@ class BarsController < ApplicationController
 
   def favorite
     current_user.favorite(@bar)
+    redirect_to root_path
+  end
+
+  def unfavorite
+    current_user.unfavorite(@bar)
+    #write conditions to find which page i'm on and redirect me to favorites page instead of returning back to index
+    redirect_to root_path
   end
 
   private

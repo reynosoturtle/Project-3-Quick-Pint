@@ -1,18 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Bars</h1>
-
-<!-- Checks if user is a bar owner -->
-<% if user_signed_in? && current_user.type == 'Owner' %>
-  <%= link_to 'New Bar', new_bar_path %>
-<% end %>
-<!-- Normal User -->
-<% if user_signed_in? %>
-  <%= link_to 'Log Out', destroy_user_session_url, method: :delete %>
-  <% else %>
-  <%= link_to 'Log In', new_user_session_url %>
-<% end %>
-
 <table>
   <thead>
     <tr>
@@ -30,8 +17,16 @@
         <td><%= bar.opening_hour %></td>
         <td><%= bar.closing_hour %></td>
         <td><%= bar.image %></td>
-        <td><%= link_to 'Show', bar %></td>
-        <td><%= link_to 'Favourite', bar %></td>
+        <td><%= link_to 'Show', bar_path(bar) %></td>
+        <% if user_signed_in? %>
+          <% if current_user.favorited?(bar) %>
+            <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar) %></td>
+          <% else %>
+            <td><%= link_to 'Favourite', favorite_bar_path(bar) %></td>
+          <% end %>
+        <% else %>
+          <td><%= link_to 'Favourite', new_user_registration_path %></td>
+        <% end %>
         <!-- Checks if user is owner of bar -->
         <% if user_signed_in? && current_user.id == bar.owner_id %>
           <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
