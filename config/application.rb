@@ -12,7 +12,7 @@ module Quickpint
     config.load_defaults 5.2
 
     #set time zone to be Singapore
-    config.time_zone = "Singapore" => "Asia/Singapore"
+    config.time_zone = "Singapore"
     config.active_record.time_zone_aware_types = [:datetime, :time]
 
     # Settings in config/environments/* take precedence over those specified here.
