@@ -6,24 +6,27 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Type.destroy_all #We delete all entries for type first before we create new types when seed file is run
+Category.destroy_all #We delete all entries for type first before we create new types when seed file is run
 # create an array with these categories in the new bar form
-# Type.create(name: 'Bar')
-# Type.create(name: 'Club')
-# Type.create(name: 'Fine Dining')
-# Type.create(name: 'Café/Bistro')
-# Type.create(name: 'Restaurant')
+Category.create(name: 'Bar')
+Category.create(name: 'Club')
+Category.create(name: 'Fine Dining')
+Category.create(name: 'Café/Bistro')
+Category.create(name: 'Restaurant')
 
-# Type.create(name: 'Air-conditioned')
-# Type.create(name: 'Smoking Allowed')
-# Type.create(name: 'Large Groups')
-# Type.create(name: 'Family-friendly')
+Category.create(name: 'Air-conditioned')
+Category.create(name: 'Smoking Allowed')
+Category.create(name: 'Large Groups')
+Category.create(name: 'Family-friendly')
 
-# Type.create(name: 'Live Band')
-# Type.create(name: 'Karaoke')
-# Type.create(name: 'Background Music')
+Category.create(name: 'Live Band')
+Category.create(name: 'Karaoke')
+Category.create(name: 'Background Music')
 
-20.times do
+p "SEEDED category DATA"
+
+
+10.times do
   o = Owner.create(email: Faker::Internet.email,
                    name: Faker::Name.name,
                    password: "legend",
@@ -37,4 +40,7 @@
   end
 end
 
-puts "SEEDED type data"
+p "SEEDED owner and bars DATA"
+
+
+

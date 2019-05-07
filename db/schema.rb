@@ -10,22 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_112013) do
+ActiveRecord::Schema.define(version: 2019_05_07_092345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bars", force: :cascade do |t|
     t.string "name"
-    t.integer "opening_hour"
-    t.integer "closing_hour"
-    t.text "image"
+    t.text "image", default: ""
     t.string "address"
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "owner_id"
+    t.text "business_hours", default: [], array: true
+    t.string "place_id"
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "long", precision: 10, scale: 6
+    t.decimal "avg_price"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_bars_on_category_id"
     t.index ["owner_id"], name: "index_bars_on_owner_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -48,11 +59,10 @@ ActiveRecord::Schema.define(version: 2019_05_06_112013) do
   create_table "promos", force: :cascade do |t|
     t.bigint "bar_id"
     t.string "name"
-    t.text "detail"
-    t.time "from"
-    t.time "till"
+    t.text "detail", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "duration"
     t.index ["bar_id"], name: "index_promos_on_bar_id"
   end
 
@@ -70,5 +80,6 @@ ActiveRecord::Schema.define(version: 2019_05_06_112013) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bars", "categories"
   add_foreign_key "bars", "users", column: "owner_id"
 end
