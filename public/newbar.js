@@ -7,7 +7,7 @@ var marker;
 //initialize map
 function initMap() {
 
-    //show singapore on map
+    //show Singapore on map
     var Singapore = new google.maps.LatLng(1.3521, 103.8198);
 
     //create infowindow
@@ -20,6 +20,7 @@ function initMap() {
     //adding auto completion stuff
     autoComplete = new google.maps.places.Autocomplete(document.querySelector('input'));
 
+    //location bound to Singapore's latlng
     autoComplete.bindTo('bounds', map);
 
     autoComplete.addListener('place_changed', handlePlaceChanged);
@@ -47,15 +48,22 @@ function handlePlaceChanged() {
 
     //business hours data returned from api is an array
     //put each array item inside an individual text field
-    let bizHourContainer = document.getElementById("hours");
+    //first remove business hours if exist from previous search
+    let bizHourEl = document.getElementsByClassName("bizHour")
+    while(bizHourEl.length > 0){
+            bizHourEl[0].parentNode.removeChild(bizHourEl[0]);
+        };
 
+    let bizHourContainer = document.getElementById("hours");
     const hoursArray = place.opening_hours.weekday_text
+
     hoursArray.forEach(function(day) {
         let newInput = document.createElement("input");
         newInput.value = day;
+        newInput.className = "bizHour"
         newInput.name = "business_hour";
         bizHourContainer.appendChild(newInput);
-    });
+        });
 
     //adding the marker with latlong
     var marker = new google.maps.Marker({
