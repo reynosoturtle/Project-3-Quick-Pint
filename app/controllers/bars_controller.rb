@@ -20,6 +20,7 @@ class BarsController < ApplicationController
   def new
     @bar = Bar.new
     @categories = Category.all
+    @owners = Owner.all
   end
 
   # GET /bars/1/edit
@@ -35,9 +36,11 @@ class BarsController < ApplicationController
     cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
     @bar.attributes = {:image => cloudinary_file["public_id"]}
     p @bar
-    @bar.save
-    # @bar.save == true
-    redirect_to @bar
+    if @bar.save == true
+      redirect_to @bar
+    else
+      render 'new'
+    end
 
     # respond_to do |format|
     #   if @bar.save
@@ -85,7 +88,6 @@ class BarsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bar_params
-    # params.require(:bar).permit(:name, :opening_hour, :closing_hour, :image, :address, :category, :owner_id)
-    params.require(:bar).permit(:name, :address, :category, :opening_hour, :closing_hour, :image)
+    params.require(:bar).permit(:name, :image, :address, :category, :business_hours, :place_id, :lat, :long, :avg_price, :category_id, :owner_id)
   end
 end

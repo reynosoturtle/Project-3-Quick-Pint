@@ -26,7 +26,7 @@
   </p>
 
 	<p>
-    <%= form.label :category, 'Category' %><br>
+    <%= form.label :category, 'Category Dummy' %><br>
     <%= form.text_field :category %>
   </p>
 
@@ -37,23 +37,27 @@
 
 	<p>
     <%= form.label :lat, 'Latitude' %><br>
-    <%= form.number_field :lat %>
+    <%= form.number_field :lat, class: :text_field, step: :any  %>
   </p>
 
 	<p>
     <%= form.label :long, 'Longtitude' %><br>
-    <%= form.number_field :long %>
+    <%= form.number_field :long, class: :text_field, step: :any  %>
   </p>
 
 	<p>
-    <%= form.label :avg_price, 'Average Price' %><br>
-    <%= form.number_field :avg_price, class: :text_field, step: :0.01 %>
+    <%= form.label :avg_price, 'Average Price (S$)' %><br>
+    <%= form.number_field :avg_price, class: :text_field, step: :any %>
   </p>
-
 
 	<p>
     <%= form.label :category_id, 'Type of Bar' %><br>
     <%= form.collection_select :category_id, @categories, :id, :name %>
+  </p>
+
+	<p>
+    <%= form.label :owner_id, 'Owner Bar' %><br>
+    <%= form.collection_select :owner_id, @owners, :id, :name %>
   </p>
 
 	<p>

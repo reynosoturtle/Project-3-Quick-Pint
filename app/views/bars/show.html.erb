@@ -7,13 +7,12 @@
 
 <p>
   <strong>Business hours:</strong>
-  <%= @bar.opening_hour %><br>
-	<%= @bar.closing_hour %><br>
+  <%= @bar.business_hours %><br>
 </p>
 
 <p>
-  <strong>Bar Image:</strong>
-  <%= @bar.image %>
+  <strong>Bar Image:</strong><br>
+	<%= cl_image_tag(@bar.image) %>
 </p>
 
 <p>
@@ -22,9 +21,40 @@
 </p>
 
 <p>
-  <strong>Type of Bar:</strong>
+  <strong>Category (dummy):</strong>
   <%= @bar.category %>
 </p>
+
+<p>
+  <strong>Type of Bar:</strong>
+  <%= @bar.place_id %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @bar.lat %>
+</p>
+
+<p>
+  <strong>Longtitude:</strong>
+  <%= @bar.long %>
+</p>
+
+<p>
+  <strong>Average Price:</strong>
+  <%= @bar.avg_price %>
+</p>
+
+<p>
+  <strong>Bar Category (somehow this data SEO can't seem to make it appear):</strong>
+
+</p>
+
+<p>
+  <strong>Name of Owner:</strong>
+  <%= @bar.owner.name %>
+</p>
+
 
 
 <%= link_to 'Edit', edit_bar_path(@bar), class: 'btn btn-primary' %> |
