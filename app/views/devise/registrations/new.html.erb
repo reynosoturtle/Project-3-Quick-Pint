@@ -12,11 +12,13 @@
   <div class="field">
     Register as a/an:<br><br>
 
-    <%= f.radio_button(:role, "customer", :checked => 'checked', :style => 'display: inline;') %>
-    <%= label(:role_customer, "Customer", :style => 'display: inline;') %>
+    <%= f.label :type %>
     <br>
-    <%= f.radio_button(:role, "owner", :checked => 'checked', :style => 'display: inline;') %>
-    <%= label(:role_owner, "Owner", :style => 'display: inline;') %>
+    <%= f.select :type, options_for_select(%w[Customer Owner]) %></div>
+    <%# <%= f.radio_button(:type, "customer", :checked => 'checked', :style => 'display: inline;') %> 
+    <%# <%= label(:type_customer, "Customer", :style => 'display: inline;') %>
+    <%# <%= f.radio_button(:type, "owner", :checked => 'checked', :style => 'display: inline;') %>
+    <%# <%= label(:type_owner, "Owner", :style => 'display: inline;') %> 
   </div>
 
   <div class="field">

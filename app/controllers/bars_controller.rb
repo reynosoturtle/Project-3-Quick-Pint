@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class BarsController < ApplicationController
-  # before_action :set_bar, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, :except => [ :show, :index ]
+  #doing the set bar allows it to universally adopt the private properties for the crud + fav for the setbar.
+  before_action :set_bar, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :authenticate_user!, except: [:show, :index]
 
   # GET /bars
   # GET /bars.json
@@ -11,10 +14,7 @@ class BarsController < ApplicationController
 
   # GET /bars/1
   # GET /bars/1.json
-  def show
-    @bar = Bar.find(params[:id])
-
-  end
+  def show; end
 
   # GET /bars/new
   def new
@@ -22,9 +22,7 @@ class BarsController < ApplicationController
   end
 
   # GET /bars/1/edit
-  def edit
-    @bar = Bar.find(params[:id])
-  end
+  def edit; end
 
   # POST /bars
   # POST /bars.json
@@ -50,9 +48,8 @@ class BarsController < ApplicationController
   # PATCH/PUT /bars/1.json
   def update
     respond_to do |format|
-      @bar = Bar.find(params[:id])
       if @bar.update(bar_params)
-        format.html { redirect_to @bar, notice: "Bar was successfully updated." }
+        format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
         format.json { render :show, status: :ok, location: @bar }
       else
         format.html { render :edit }
@@ -64,12 +61,15 @@ class BarsController < ApplicationController
   # DELETE /bars/1
   # DELETE /bars/1.json
   def destroy
-    @bar = Bar.find(params[:id])
     @bar.destroy
     respond_to do |format|
-      format.html { redirect_to bars_url, notice: "Bar was successfully destroyed." }
+      format.html { redirect_to bars_url, notice: 'Bar was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def favorite
+    current_user.favorite(@bar)
   end
 
   private

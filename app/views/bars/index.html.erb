@@ -3,7 +3,7 @@
 <h1>Bars</h1>
 
 <!-- Checks if user is a bar owner -->
-<% if user_signed_in? && current_user.role.downcase == 'owner' %>
+<% if user_signed_in? && current_user.type == 'Owner' %>
   <%= link_to 'New Bar', new_bar_path %>
 <% end %>
 <!-- Normal User -->
@@ -31,6 +31,7 @@
         <td><%= bar.closing_hour %></td>
         <td><%= bar.image %></td>
         <td><%= link_to 'Show', bar %></td>
+        <td><%= link_to 'Favourite', bar %></td>
         <!-- Checks if user is owner of bar -->
         <% if user_signed_in? && current_user.id == bar.owner_id %>
           <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
