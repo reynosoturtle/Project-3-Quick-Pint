@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_121309) do
+ActiveRecord::Schema.define(version: 2019_05_08_025517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,9 +27,16 @@ ActiveRecord::Schema.define(version: 2019_05_07_121309) do
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "long", precision: 10, scale: 6
     t.decimal "avg_price"
-    t.bigint "category_id"
-    t.index ["category_id"], name: "index_bars_on_category_id"
     t.index ["owner_id"], name: "index_bars_on_owner_id"
+  end
+
+  create_table "bars_categories", force: :cascade do |t|
+    t.bigint "bars_id"
+    t.bigint "categories_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bars_id"], name: "index_bars_categories_on_bars_id"
+    t.index ["categories_id"], name: "index_bars_categories_on_categories_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -79,6 +86,5 @@ ActiveRecord::Schema.define(version: 2019_05_07_121309) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bars", "categories"
   add_foreign_key "bars", "users", column: "owner_id"
 end
