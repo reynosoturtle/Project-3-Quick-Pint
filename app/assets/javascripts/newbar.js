@@ -2,7 +2,7 @@ var map;
 var service;
 var infowindow;
 var autoComplete;
-var marker;
+var marker = null;
 var myLatLng;
 
 //initialize map
@@ -50,29 +50,33 @@ function handlePlaceChanged() {
     //business hours data returned from api is an array
     //put each array item inside an individual text field
     //first remove business hours if exist from previous search
-    let bizHourEl = document.getElementsByClassName("bizHour")
-    while(bizHourEl.length > 0){
-            bizHourEl[0].parentNode.removeChild(bizHourEl[0]);
-        };
+    // let bizHourEl = document.getElementsByClassName("bizHour")
+    // while(bizHourEl.length > 0){
+    //         bizHourEl[0].parentNode.removeChild(bizHourEl[0]);
+    //     };
 
     let bizHourContainer = document.getElementById("hours");
     const hoursArray = place.opening_hours.weekday_text
 
-    hoursArray.forEach(function(day) {
-        let newInput = document.createElement("input");
-        newInput.value = day;
-        newInput.className = "bizHour"
-        newInput.name = "business_hour";
-        bizHourContainer.appendChild(newInput);
-        });
+document.getElementById("bar_business_hours").value = hoursArray;
 
+    // hoursArray.forEach(function(day) {
+    //     let newInput = document.createElement("input");
+    //     newInput.value = day;
+    //     newInput.className = "bizHour"
+    //     newInput.name = "business_hour";
+    //     bizHourContainer.appendChild(newInput);
+    //     });
+
+    if (marker){marker.setMap(null)}
     //adding the marker with latlong
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
         position: myLatLng,
         title: place.name
     });
 
     marker.setMap(map);
+
 
     //text to show inside the marker infoview
     var contentString = '<strong>' + place.name + '</strong>' + '<div>Rating: ' + place.rating + ', ' + place.user_ratings_total + ' Google reviews</div>' + '</div>' + '<div>' + place.international_phone_number + '</div>'
