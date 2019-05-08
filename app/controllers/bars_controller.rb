@@ -91,6 +91,6 @@ class BarsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bar_params
-    params.require(:bar).permit(:name, :image, :address, :category, :business_hours => [], :place_id, :lat, :long, :avg_price, :category_id => [], :owner_id)
+    params.require(:bar).permit(:name, :image, :address, :category, :business_hours, :place_id, :lat, :long, :avg_price, :category_ids => [])
   end
 end
