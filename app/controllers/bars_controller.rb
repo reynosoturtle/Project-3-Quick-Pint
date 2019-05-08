@@ -111,7 +111,6 @@ class BarsController < ApplicationController
 
 
   def pen
-
     userLat = params[:lat]
     userLong = params[:long]
 
@@ -125,12 +124,8 @@ class BarsController < ApplicationController
     render :json => msg
   end
 
-  def newbar
-
-  end
-
   def distance
-  
+
   end
 
   def favorite
