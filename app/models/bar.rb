@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Bar < ApplicationRecord
   has_many :promos
   has_and_belongs_to_many :categories
