@@ -46,7 +46,11 @@
 
 <p>
   <strong>Bar Category (can't seem to make it appear as a word):</strong><br>
-	<%= @bar.category.name %>
+	<% index = 0 %>
+	<% @bar.categories.each do |cat_name| %>%
+		<%= @bar.categories[index].name %>
+		<% index = index + 1 %>
+	<% end %>
 </p>
 
 <p>
