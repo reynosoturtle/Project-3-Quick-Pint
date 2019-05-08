@@ -1,5 +1,4 @@
 var map;
-var service;
 var infowindow;
 var autoComplete;
 var marker = null;
@@ -37,39 +36,19 @@ function handlePlaceChanged() {
     //save the lat long to place the marker later on
     const lat = place.geometry.location.lat();
     const long = place.geometry.location.lng();
-    var myLatLng = new google.maps.LatLng(lat, long);
+    myLatLng = new google.maps.LatLng(lat, long);
 
     //input the data retrieved from google into the text fields
     document.getElementById("name").value = place.name;
     document.getElementById("address").value = place.formatted_address;
-    //saving these to db because we need them for map markers (these will hidden fields on views)
+    document.getElementById("hours").value = place.opening_hours.weekday_text;
+    //saving these to db because we need them for map markers (these will be hidden fields on views)
     document.getElementById("lat").value = lat;
     document.getElementById("long").value = long;
     document.getElementById("place_id").value = place.place_id;
 
-    //business hours data returned from api is an array
-    //put each array item inside an individual text field
-    //first remove business hours if exist from previous search
-    // let bizHourEl = document.getElementsByClassName("bizHour")
-    // while(bizHourEl.length > 0){
-    //         bizHourEl[0].parentNode.removeChild(bizHourEl[0]);
-    //     };
-
-    let bizHourContainer = document.getElementById("hours");
-    const hoursArray = place.opening_hours.weekday_text
-
-document.getElementById("bar_business_hours").value = hoursArray;
-
-    // hoursArray.forEach(function(day) {
-    //     let newInput = document.createElement("input");
-    //     newInput.value = day;
-    //     newInput.className = "bizHour"
-    //     newInput.name = "business_hour";
-    //     bizHourContainer.appendChild(newInput);
-    //     });
-
-    if (marker){marker.setMap(null)}
     //adding the marker with latlong
+    if (marker) { marker.setMap(null) }
     marker = new google.maps.Marker({
         position: myLatLng,
         title: place.name
@@ -77,16 +56,15 @@ document.getElementById("bar_business_hours").value = hoursArray;
 
     marker.setMap(map);
 
-
     //text to show inside the marker infoview
     var contentString = '<strong>' + place.name + '</strong>' + '<div>Rating: ' + place.rating + ', ' + place.user_ratings_total + ' Google reviews</div>' + '</div>' + '<div>' + place.international_phone_number + '</div>'
 
-    var infowindow = new google.maps.InfoWindow({
+    infowindow = new google.maps.InfoWindow({
         content: contentString,
     });
 
     //show the infoview when clicked
     google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map,marker);
+        infowindow.open(map, marker);
     });
 };
