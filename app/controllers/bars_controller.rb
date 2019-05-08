@@ -74,27 +74,20 @@ class BarsController < ApplicationController
       puts cloudinary_file["public_id"]
       @bar.attributes = {:image => cloudinary_file["public_id"]}
       p @bar
-
-    if @bar.update(bar_params)
-      if @bar.update(image: cloudinary_file["public_id"])
-        format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bar }
+    respond_to do |format|
+      if @bar.update(bar_params)
+        if @bar.update(image: cloudinary_file["public_id"])
+          format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
+          format.json { render :show, status: :ok, location: @bar }
+        else
+          format.html { render :edit }
+          format.json { render json: @bar.errors, status: :unprocessable_entity }
+        end
       else
-        render 'edit'
+        format.html { render :edit }
+        format.json { render json: @bar.errors, status: :unprocessable_entity }
       end
-    else
-      render 'edit'
     end
-
-    # respond_to do |format|
-    #   if @bar.update(bar_params)
-    #     format.html { redirect_to @bar, notice: "Bar was successfully updated." }
-    #     format.json { render :show, status: :ok, location: @bar }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @bar.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # DELETE /bars/1

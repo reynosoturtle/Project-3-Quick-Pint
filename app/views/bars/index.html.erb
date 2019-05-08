@@ -22,13 +22,12 @@
 						<%= cl_image_tag(bar.image) %>
 					<% end %>
 				</td>
-        <td><%= link_to 'Show', bar %>|</td>
-        <td><%= link_to 'Show', bar_path(bar) %></td>
+        <td><%= link_to 'Show', bar_path(bar) %>|</td>
         <% if user_signed_in? %>
           <% if current_user.favorited?(bar) %>
-            <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar) %></td>
+            <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar) %>|</td>
           <% else %>
-            <td><%= link_to 'Favourite', favorite_bar_path(bar) %></td>
+            <td><%= link_to 'Favourite', favorite_bar_path(bar) %>|</td>
           <% end %>
         <% else %>
           <td><%= link_to 'Favourite', new_user_registration_path %></td>
