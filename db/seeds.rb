@@ -33,10 +33,10 @@ p "SEEDED category DATA"
                    role: "owner")
   5.times do
     o.bars.create(name: Faker::Restaurant.name,
-                  category: Faker::Restaurant.type,
-                  address: Faker::Address.street_address,
-                  opening_hour: "0930",
-                  closing_hour: "2200")
+                  # category: Faker::Restaurant.type,
+                  address: Faker::Address.street_address)
+                  # opening_hour: "0930",
+                  # closing_hour: "2200")
   end
 end
 
