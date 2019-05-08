@@ -47,13 +47,14 @@
 
 	<p>
     <%= form.label :category_id, 'Type of Bar' %><br>
-    <%= form.collection_select :category_id, @categories, :id, :name %>
+    <%= form.collection_check_boxes :category_id, @categories, :id, :name %>
   </p>
 
-	<p>
-    <%= form.label :owner_id, 'Owner Bar' %><br>
-    <%= form.collection_select :owner_id, @owners, :id, :name %>
-  </p>
+	<!--<p>
+    <%= form.label :owner_id, 'Owner Bar' %><br>-->
+    <%= form.hidden_field :owner_id, :value => current_user.id%>
+
+  <!--</p> -->
 
 	<p>
     <%= form.submit %>

@@ -13,6 +13,7 @@ class BarsController < ApplicationController
   # GET /bars/1.json
   def show
     @bar = Bar.find(params[:id])
+    # @category = Category.all
 
   end
 
@@ -90,6 +91,6 @@ class BarsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bar_params
-    params.require(:bar).permit(:name, :image, :address, :category, :business_hours, :place_id, :lat, :long, :avg_price, :category_id, :owner_id)
+    params.require(:bar).permit(:name, :image, :address, :category, :business_hours => [], :place_id, :lat, :long, :avg_price, :category_id => [], :owner_id)
   end
 end
