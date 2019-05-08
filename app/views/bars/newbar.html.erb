@@ -1,0 +1,36 @@
+<style>
+	#map{
+		border: 1px solid black;
+		margin: 10px 0px;
+		height: 400px;
+		width: 500px;
+	}
+	input{
+		width: 200px;
+	}
+</style>
+
+<input></input>
+
+<div id="map"></div>
+<script async type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap"></script>
+
+<table id="bar_details">
+  <tr>
+    <td>Name</td>
+    <td><input class="field" id="name"/></td>
+  </tr>
+  <tr>
+    <td>Address</td>
+    <td><input class="field" id="address"/></td>
+  </tr>
+  <tr>
+    <td>Business Hour</td>
+    <td id="hours"></td>
+  </tr>
+  <tr>
+    <td><input class="field" id="lat" type="hidden"/></td>
+    <td><input class="field" id="long" type="hidden"/></td>
+    <td><input class="field" id="place_id" type="hidden"/></td>
+  </tr>
+</table>
