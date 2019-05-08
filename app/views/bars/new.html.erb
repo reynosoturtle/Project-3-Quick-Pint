@@ -1,5 +1,64 @@
 <h1>New Bar</h1>
 
-<%= render 'form', bar: @bar %>
+<%= form_with scope: :bar, url: bars_path, local: true do |form| %>
+  <p>
+    <%= form.label :name, 'Bar Name' %><br>
+    <% if params[:bar] != nil %>
+    	<%= form.text_field :name, :value => params[:bar][:name]%>
+    <% else %>
+    	<%= form.text_field :name %>
+    <% end %>
+  </p>
+
+	<p>
+    <%= form.label :business_hours, 'Business Hours' %><br>
+    <%= form.text_field :business_hours%>
+  </p>
+
+	<p>
+    <%= form.label :image, 'Upload Bar Image' %><br>
+    <%= form.file_field :image %>
+  </p>
+
+	<p>
+    <%= form.label :address, 'Bar Address' %><br>
+    <%= form.text_field :address %>
+  </p>
+
+	<p>
+    <%= form.label :place_id, 'Place_Id' %><br>
+    <%= form.text_field :place_id %>
+  </p>
+
+	<p>
+    <%= form.label :lat, 'Latitude' %><br>
+    <%= form.number_field :lat, class: :text_field, step: :any  %>
+  </p>
+
+	<p>
+    <%= form.label :long, 'Longtitude' %><br>
+    <%= form.number_field :long, class: :text_field, step: :any  %>
+  </p>
+
+	<p>
+    <%= form.label :avg_price, 'Average Price (S$)' %><br>
+    <%= form.number_field :avg_price, class: :text_field, step: :any %>
+  </p>
+
+	<p>
+    <!-- <%= form.label :category_id, 'Type of Bar' %><br> -->
+    <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
+  </p>
+
+	<!--<p>
+    <%= form.label :owner_id, 'Owner Bar' %><br>-->
+    <%= form.hidden_field :owner_id, :value => current_user.id%>
+
+  <!--</p> -->
+
+	<p>
+    <%= form.submit %>
+  </p>
+<% end %>
 
 <%= link_to 'Back', bars_path %>

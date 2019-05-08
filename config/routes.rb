@@ -3,7 +3,12 @@ Rails.application.routes.draw do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
   # devise_for :users, controllers: { registrations: 'users/registrations' }
-  resources :bars
+  resources :bars do
+    get 'favorite', on: :member
+    get 'unfavorite', on: :member
+    #member is a ruby native syntax. A member route will require an ID, because it acts on a member
+  end
+  get 'favorites' => "favorites#index"
   root to: "bars#index"
 
   get '/newbar' => 'bars#newbar'

@@ -7,13 +7,18 @@
 
 <p>
   <strong>Business hours:</strong>
-  <%= @bar.opening_hour %><br>
-	<%= @bar.closing_hour %><br>
+
+  <%= @bar.business_hours %><br>
 </p>
 
 <p>
-  <strong>Bar Image:</strong>
-  <%= @bar.image %>
+  <strong>Bar Image:</strong><br>
+		<% if @bar.image == nil %>
+			<%= '' %>
+		<% else %>
+			<%= cl_image_tag(@bar.image) %>
+		<% end %>
+
 </p>
 
 <p>
@@ -23,8 +28,39 @@
 
 <p>
   <strong>Type of Bar:</strong>
-  <%= @bar.category %>
+
+  <%= @bar.place_id %>
 </p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @bar.lat %>
+</p>
+
+<p>
+  <strong>Longtitude:</strong>
+  <%= @bar.long %>
+</p>
+
+<p>
+  <strong>Average Price:</strong>
+  <%= @bar.avg_price %>
+</p>
+
+<p>
+  <strong>Bar Category (can't seem to make it appear as a word):</strong><br>
+	<% index = 0 %>
+	<% @bar.categories.each do |cat_name| %>%
+		<%= @bar.categories[index].name %>
+		<% index = index + 1 %>
+	<% end %>
+</p>
+
+<p>
+  <strong>Name of Owner:</strong><br>
+  <%= @bar.owner.name %>
+</p>
+
 
 
 <%= link_to 'Edit', edit_bar_path(@bar), class: 'btn btn-primary' %> |

@@ -1,0 +1,42 @@
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Business hours</th>
+      <th>Images</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if user_signed_in? && @favorites.present? %>
+      <% @favorites.each do |favorite| %>
+        <% bar = Bar.find(favorite.favoritable_id) %>
+          <tr>
+            <td><%= bar.name %></td>
+            <td><%= bar.opening_hour %></td>
+            <td><%= bar.closing_hour %></td>
+            <td><%= bar.image %></td>
+            <td><%= link_to 'Show', bar_path(bar) %></td>
+            <% if user_signed_in? %>
+              <% if current_user.favorited?(bar) %>
+                <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar) %></td>
+              <% else %>
+                <td><%= link_to 'Favourite', favorite_bar_path(bar) %></td>
+              <% end %>
+            <% else %>
+              <td><%= link_to 'Favourite', new_user_registration_path %></td>
+            <% end %>
+            <!-- Checks if user is owner of bar -->
+            <% if user_signed_in? && current_user.id == bar.owner_id %>
+              <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
+              <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+
+          </tr>
+        <% end %>
+    <% end %>
+  </tbody>
+</table>
