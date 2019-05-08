@@ -3,6 +3,7 @@ var service;
 var infowindow;
 var autoComplete;
 var marker;
+var myLatLng;
 
 //initialize map
 function initMap() {
@@ -31,12 +32,12 @@ function handlePlaceChanged() {
 
     //getPlace gives me the details from google of the location in the autocomplete field
     const place = autoComplete.getPlace();
-    // console.log('place', place);
+    console.log('place', place);
 
     //save the lat long to place the marker later on
     const lat = place.geometry.location.lat();
     const long = place.geometry.location.lng();
-    const myLatLng = new google.maps.LatLng(lat, long);
+    var myLatLng = new google.maps.LatLng(lat, long);
 
     //input the data retrieved from google into the text fields
     document.getElementById("name").value = place.name;

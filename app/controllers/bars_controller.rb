@@ -1,7 +1,7 @@
 class BarsController < ApplicationController
   # before_action :set_bar, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, :except => [ :show, :index ]
-
+protect_from_forgery except: [:pen]
   # GET /bars
   # GET /bars.json
   def index
@@ -63,15 +63,34 @@ class BarsController < ApplicationController
     end
   end
 
+  def pen
+
+    userLat = params[:lat]
+    userLong = params[:long]
+
+    barLat = 1.3580476
+    barLong = 103.7664238
+
+    distance = Math.sqrt((userLat - barLat) ** 2 + (userLong - barLong) ** 2 ) * 111
+
+    #write ur formula here
+    msg = {:yourDistance => distance}
+    render :json => msg
+  end
+
+  def newbar
+
+  end
+
+  def distance
+
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_bar
     @bar = Bar.find(params[:id])
-  end
-
-  def newbar
-
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

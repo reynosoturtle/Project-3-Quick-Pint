@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root to: "bars#index"
 
   get '/newbar' => 'bars#newbar'
+  get '/distance' => 'bars#distance'
+
+  post '/pen' => 'bars#pen'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
