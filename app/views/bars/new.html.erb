@@ -1,18 +1,34 @@
 <h1>New Bar</h1>
 
+<style>
+	#map{
+		border: 1px solid black;
+		margin: 10px 0px;
+		height: 400px;
+		width: 500px;
+	}
+	input{
+		width: 200px;
+	}
+</style>
+
+<input></input>
+
+<div id="map"></div>
+<script async type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap"></script>
+
+
 <%= form_with scope: :bar, url: bars_path, local: true do |form| %>
   <p>
     <%= form.label :name, 'Bar Name' %><br>
-    <% if params[:bar] != nil %>
-    	<%= form.text_field :name, :value => params[:bar][:name]%>
-    <% else %>
-    	<%= form.text_field :name %>
-    <% end %>
+    <%= form.text_field :name, id:"name" %>
   </p>
 
 	<p>
+		<div id="hours">
     <%= form.label :business_hours, 'Business Hours' %><br>
     <%= form.text_field :business_hours%>
+   </div>
   </p>
 
 	<p>
@@ -22,22 +38,22 @@
 
 	<p>
     <%= form.label :address, 'Bar Address' %><br>
-    <%= form.text_field :address %>
+    <%= form.text_field :address, id:"address" %>
   </p>
 
 	<p>
     <%= form.label :place_id, 'Place_Id' %><br>
-    <%= form.text_field :place_id %>
+    <%= form.hidden_field :place_id, id:"place_id" %>
   </p>
 
 	<p>
     <%= form.label :lat, 'Latitude' %><br>
-    <%= form.number_field :lat, class: :text_field, step: :any  %>
+    <%= form.hidden_field :lat, class: :text_field, step: :any, id:"lat"  %>
   </p>
 
 	<p>
     <%= form.label :long, 'Longtitude' %><br>
-    <%= form.number_field :long, class: :text_field, step: :any  %>
+    <%= form.hidden_field :long, class: :text_field, step: :any, id:"long"  %>
   </p>
 
 	<p>
@@ -55,6 +71,8 @@
     <%= form.hidden_field :owner_id, :value => current_user.id%>
 
   <!--</p> -->
+
+
 
 	<p>
     <%= form.submit %>
