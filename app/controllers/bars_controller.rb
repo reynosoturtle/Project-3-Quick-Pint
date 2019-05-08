@@ -35,14 +35,20 @@ class BarsController < ApplicationController
   # POST /bars.json
   def create
     @bar = Bar.new(bar_params)
-    uploaded_file = params[:bar][:picture].path
+
+
+    uploaded_file = params[:bar][:image].path
+
     cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
     @bar.attributes = {:image => cloudinary_file["public_id"]}
+    p cloudinary_file
+    p cloudinary_file["public_id"]
     p @bar
     if @bar.save == true
       redirect_to @bar
     else
       render 'new'
+      byebug
     end
 
     # respond_to do |format|
@@ -91,6 +97,6 @@ class BarsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bar_params
-    params.require(:bar).permit(:name, :image, :address, :category, :business_hours, :place_id, :lat, :long, :avg_price, :category_ids => [])
+    params.require(:bar).permit(:name, :image, :address, :category, :business_hours, :place_id, :lat, :long, :avg_price, :owner_id, :category_ids => [])
   end
 end
