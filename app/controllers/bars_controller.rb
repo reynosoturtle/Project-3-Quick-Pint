@@ -66,10 +66,16 @@ class BarsController < ApplicationController
       @bar = Bar.find(params[:id])
       uploaded_file = params[:bar][:image].path
       cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
+      puts cloudinary_file["public_id"]
       @bar.attributes = {:image => cloudinary_file["public_id"]}
+      p @bar
 
     if @bar.update(bar_params)
-      redirect_to @bar
+      if @bar.update(image: cloudinary_file["public_id"])
+        redirect_to @bar
+      else
+        render 'edit'
+      end
     else
       render 'edit'
     end
@@ -105,6 +111,6 @@ class BarsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def bar_params
-    params.require(:bar).permit(:name, :image, :address, :category, :business_hours, :place_id, :lat, :long, :avg_price, :owner_id, :category_ids => [])
+    params.require(:bar).permit(:name, :image, :address, :business_hours, :place_id, :lat, :long, :avg_price, :owner_id, :category_ids => [])
   end
 end
