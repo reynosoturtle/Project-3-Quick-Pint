@@ -14,9 +14,15 @@
     <% @bars.each do |bar| %>
       <tr>
         <td><%= bar.name %></td>
-        <td><%= bar.opening_hour %></td>
-        <td><%= bar.closing_hour %></td>
-        <td><%= bar.image %></td>
+        <td><%= bar.business_hours %></td>
+        <td>
+					<% if bar.image == nil %>
+						<%= '' %>
+					<% else %>
+						<%= cl_image_tag(bar.image) %>
+					<% end %>
+				</td>
+        <td><%= link_to 'Show', bar %>|</td>
         <td><%= link_to 'Show', bar_path(bar) %></td>
         <% if user_signed_in? %>
           <% if current_user.favorited?(bar) %>
@@ -29,7 +35,7 @@
         <% end %>
         <!-- Checks if user is owner of bar -->
         <% if user_signed_in? && current_user.id == bar.owner_id %>
-          <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
+          <td><%= link_to 'Edit', edit_bar_path(bar) %>| </td>
           <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
 

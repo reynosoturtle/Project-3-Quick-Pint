@@ -7,14 +7,12 @@
   </p>
 
   <p>
-    <%= form.label :'Business Hours' %><br>
-    <%= form.time_field :opening_hour %>
-    <%= form.time_field :closing_hour %>
-
+    <%= form.label :business_hours, 'Business Hours' %><br>
+    <%= form.time_field :business_hours %>
   </p>
 
   <p>
- 		<%= form.label :image, 'Bar Image' %><br>
+ 		<%= form.label :image, 'Upload Bar Image' %><br>
 		<%= form.file_field :image %>
   </p>
 
@@ -24,8 +22,33 @@
   </p>
 
 	<p>
-  	 <%= form.label :category, 'Category' %><br>
-    <%= form.text_field :category %>
+    <%= form.label :place_id, 'Place_Id' %><br>
+    <%= form.text_field :place_id %>
+  </p>
+
+	<p>
+    <%= form.label :lat, 'Latitude' %><br>
+    <%= form.number_field :lat, class: :text_field, step: :any  %>
+  </p>
+
+	<p>
+    <%= form.label :long, 'Longtitude' %><br>
+    <%= form.number_field :long, class: :text_field, step: :any  %>
+  </p>
+
+	<p>
+    <%= form.label :avg_price, 'Average Price (S$)' %><br>
+    <%= form.number_field :avg_price, class: :text_field, step: :any %>
+  </p>
+
+	<p>
+    <%= form.label :category_id, 'Type of Bar' %><br>
+    <%= form.collection_select :category_id, @categories, :id, :name %>
+  </p>
+
+	<p>
+    <%= form.label :owner_id, 'Owner Bar' %><br>
+    <%= form.collection_select :owner_id, @owners, :id, :name %>
   </p>
 
   <p>

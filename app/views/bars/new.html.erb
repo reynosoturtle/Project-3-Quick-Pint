@@ -11,18 +11,13 @@
   </p>
 
 	<p>
-    <%= form.label :opening_hour, 'Business Opening Hour' %><br>
-    <%= form.number_field :opening_hour%>
-  </p>
-
-	<p>
-    <%= form.label :closing_hour, 'Business Closing Hour' %><br>
-    <%= form.number_field :closing_hour %>
+    <%= form.label :business_hours, 'Business Hours' %><br>
+    <%= form.text_field :business_hours%>
   </p>
 
 	<p>
     <%= form.label :image, 'Upload Bar Image' %><br>
-    <%= form.text_field :image %>
+    <%= form.file_field :image %>
   </p>
 
 	<p>
@@ -31,9 +26,35 @@
   </p>
 
 	<p>
-    <%= form.label :category, 'Type of Bar' %><br>
-    <%= form.text_field :category %>
+    <%= form.label :place_id, 'Place_Id' %><br>
+    <%= form.text_field :place_id %>
   </p>
+
+	<p>
+    <%= form.label :lat, 'Latitude' %><br>
+    <%= form.number_field :lat, class: :text_field, step: :any  %>
+  </p>
+
+	<p>
+    <%= form.label :long, 'Longtitude' %><br>
+    <%= form.number_field :long, class: :text_field, step: :any  %>
+  </p>
+
+	<p>
+    <%= form.label :avg_price, 'Average Price (S$)' %><br>
+    <%= form.number_field :avg_price, class: :text_field, step: :any %>
+  </p>
+
+	<p>
+    <!-- <%= form.label :category_id, 'Type of Bar' %><br> -->
+    <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
+  </p>
+
+	<!--<p>
+    <%= form.label :owner_id, 'Owner Bar' %><br>-->
+    <%= form.hidden_field :owner_id, :value => current_user.id%>
+
+  <!--</p> -->
 
 	<p>
     <%= form.submit %>
