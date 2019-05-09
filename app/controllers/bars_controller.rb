@@ -52,7 +52,7 @@ class BarsController < ApplicationController
     #   params[:bar][:business_hours]
     # end
     uploaded_file = params[:bar][:image].path
-    cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
+    cloudinary_file = Cloudinary::Uploader.upload(uploaded_file, :folder => "quick-pint")
     @bar.attributes = {:image => cloudinary_file["public_id"]}
     # p cloudinary_file
     # p cloudinary_file["public_id"]
@@ -82,7 +82,7 @@ class BarsController < ApplicationController
       @bar = Bar.find(params[:id])
       if params[:bar][:image] #insert this into quickpint
         uploaded_file = params[:bar][:image].path
-        cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
+        cloudinary_file = Cloudinary::Uploader.upload(uploaded_file, :folder => "quick-pint")
         puts cloudinary_file["public_id"]
         @bar.attributes = {:image => cloudinary_file["public_id"]}
         p @bar
