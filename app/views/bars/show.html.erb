@@ -1,3 +1,18 @@
+<style>
+	#map{
+		border: 1px solid black;
+		margin: 10px 0px;
+		height: 400px;
+		width: 500px;
+	}
+	input{
+		width: 200px;
+	}
+</style>
+
+<div id='map'></div>
+<script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
+
 <p id="notice"><%= notice %></p>
 
         <% if user_signed_in? %>
@@ -46,19 +61,15 @@
   <%= @bar.address %>
 </p>
 
-<p>
-  <strong>Place_id:</strong>
-
+<p style="display:none">
   <%= @bar.place_id %>
 </p>
 
-<p>
-  <strong>Latitude:</strong>
+<p style="display:none">
   <%= @bar.lat %>
 </p>
 
-<p>
-  <strong>Longtitude:</strong>
+<p style="display:none">
   <%= @bar.long %>
 </p>
 
