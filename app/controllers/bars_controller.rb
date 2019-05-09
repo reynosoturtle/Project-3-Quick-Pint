@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class BarsController < ApplicationController
+
   #doing the set bar allows it to universally adopt the private properties for the crud + fav for the setbar.
   before_action :set_bar, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite]
   before_action :authenticate_user!, except: [:show, :index]
+  protect_from_forgery except: [:pen]
 
   # GET /bars
   # GET /bars.json
@@ -39,12 +41,21 @@ class BarsController < ApplicationController
   # POST /bars
   # POST /bars.json
   def create
-    @bar = Bar.new(bar_params)
+
+   # params[:bar][:business_hours] = params[:bar][:business_hours].split(',')
+    p "-=8===================D"
+    p params
+        @bar = Bar.new(bar_params)
+        p @bar
+    # p params[:bar].split('')
+    # params[:bar][:business_hours].each do |day|
+    #   params[:bar][:business_hours]
+    # end
     uploaded_file = params[:bar][:image].path
     cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
     @bar.attributes = {:image => cloudinary_file["public_id"]}
-    p cloudinary_file
-    p cloudinary_file["public_id"]
+    # p cloudinary_file
+    # p cloudinary_file["public_id"]
     p @bar
     if @bar.save == true
       redirect_to @bar
@@ -100,6 +111,25 @@ class BarsController < ApplicationController
     end
   end
 
+
+  def pen
+    userLat = params[:lat]
+    userLong = params[:long]
+
+    barLat = 1.3580476
+    barLong = 103.7664238
+
+    distance = Math.sqrt((userLat - barLat) ** 2 + (userLong - barLong) ** 2 ) * 111
+
+    #write ur formula here
+    msg = {:yourDistance => distance}
+    render :json => msg
+  end
+
+  def distance
+
+  end
+
   def favorite
     current_user.favorite(@bar)
     redirect_to root_path
@@ -109,6 +139,7 @@ class BarsController < ApplicationController
     current_user.unfavorite(@bar)
     #write conditions to find which page i'm on and redirect me to favorites page instead of returning back to index
     redirect_to root_path
+
   end
 
   private
