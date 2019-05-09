@@ -10,7 +10,7 @@ class BarsController < ApplicationController
   # GET /bars
   # GET /bars.json
   def index
-    @bars = Bar.order(created_at: :desc)
+    @bars = Bar.all.order(created_at: :desc)
     @users = User.all
     @page_title = 'Bars'
     #make the header dynamic
@@ -19,7 +19,7 @@ class BarsController < ApplicationController
   # GET /bars/1
   # GET /bars/1.json
   def show
-    @bar = Bar.find(params[:id])
+    @promos = @bar.promos
     # @category = Category.all
 
   end
@@ -42,15 +42,8 @@ class BarsController < ApplicationController
   # POST /bars.json
   def create
 
-   # params[:bar][:business_hours] = params[:bar][:business_hours].split(',')
-    p "-=8===================D"
-    p params
-        @bar = Bar.new(bar_params)
-        p @bar
-    # p params[:bar].split('')
-    # params[:bar][:business_hours].each do |day|
-    #   params[:bar][:business_hours]
-    # end
+    @bar = Bar.new(bar_params)
+    p @bar
     uploaded_file = params[:bar][:image].path
     cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
     @bar.attributes = {:image => cloudinary_file["public_id"]}
