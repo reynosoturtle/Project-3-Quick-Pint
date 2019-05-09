@@ -115,7 +115,6 @@ class BarsController < ApplicationController
 
 
   def pen
-
     userLat = params[:lat]
     userLong = params[:long]
 
@@ -127,10 +126,6 @@ class BarsController < ApplicationController
     #write ur formula here
     msg = {:yourDistance => distance}
     render :json => msg
-  end
-
-  def newbar
-
   end
 
   def distance
