@@ -13,30 +13,37 @@
   <tbody>
     <% @bars.each do |bar| %>
       <tr>
+
         <td><%= bar.name %></td>
         <td><%= bar.business_hours %></td>
+
+        <%# Rendering Cloudinary image %>
         <td>
-					<% if bar.image == nil %>
-						<%= '' %>
-					<% else %>
-						<%= cl_image_tag(bar.image) %>
-					<% end %>
-				</td>
-        <td><%= link_to 'Show', bar %>|</td>
-        <td><%= link_to 'Show', bar_path(bar) %></td>
+          <% if bar.image == nil %>
+            <%= '' %>
+          <% else %>
+            <%= cl_image_tag(bar.image, :width => 200) %>
+          <% end %>
+        </td>
+
+        <%# Conditionals for different users %>
+
+        <td><%= link_to 'Show', bar_path(bar), class: 'btn btn-secondary' %></td>
+
         <% if user_signed_in? %>
           <% if current_user.favorited?(bar) %>
-            <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar) %></td>
+            <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar), class: 'btn btn-secondary' %></td>
           <% else %>
-            <td><%= link_to 'Favourite', favorite_bar_path(bar) %></td>
+            <td><%= link_to 'Favourite', favorite_bar_path(bar), class: 'btn btn-secondary' %></td>
           <% end %>
         <% else %>
-          <td><%= link_to 'Favourite', new_user_registration_path %></td>
+          <td><%= link_to 'Favourite', new_user_registration_path, class: 'btn btn-secondary' %></td>
         <% end %>
-        <!-- Checks if user is owner of bar -->
+
+        <%# Checks if user is owner of bar %>
         <% if user_signed_in? && current_user.id == bar.owner_id %>
-          <td><%= link_to 'Edit', edit_bar_path(bar) %>| </td>
-          <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_bar_path(bar), class: 'btn btn-secondary' %> </td>
+          <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary' %></td>
         <% end %>
 
       </tr>

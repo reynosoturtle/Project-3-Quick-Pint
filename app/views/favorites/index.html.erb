@@ -4,7 +4,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Business hours</th>
       <th>Images</th>
       <th colspan="3"></th>
     </tr>
@@ -16,13 +15,28 @@
         <% bar = Bar.find(favorite.favoritable_id) %>
           <tr>
             <td><%= bar.name %></td>
-            <td><%= bar.opening_hour %></td>
-            <td><%= bar.closing_hour %></td>
-            <td><%= bar.image %></td>
+
+            <td>
+              <% if bar.image == nil %>
+                <%= '' %>
+              <% else %>
+                <%= cl_image_tag(bar.image, :width => 200) %>
+              <% end %>
+            </td>
+
             <td><%= link_to 'Show', bar_path(bar) %></td>
             <% if user_signed_in? %>
               <% if current_user.favorited?(bar) %>
+
+
+              <%# To redirect back to favorites page if unfavorite was done in favorite page%>
+                <% if request.env['PATH_INFO'] == "/favorites" %>
+                  <td><%= link_to 'Unfavourite', favorites_path %></td>
+                <% end %>
+
+                <!--
                 <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar) %></td>
+                -->
               <% else %>
                 <td><%= link_to 'Favourite', favorite_bar_path(bar) %></td>
               <% end %>
