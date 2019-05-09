@@ -1,11 +1,11 @@
-if (window.location.pathname == "/distance") {
+if (window.location.pathname == "/bars") {
 
     navigator.geolocation.getCurrentPosition(position => {
 
-        const lat = position.coords.latitude
-        const long = position.coords.longitude
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
 
-        fetch("/pen", {
+        fetch("/distance/get", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -118,12 +118,12 @@ class BarsController < ApplicationController
   end
 
 
-  def pen
+  def calculate
     userLat = params[:lat]
     userLong = params[:long]
 
-    barLat = 1.3580476
-    barLong = 103.7664238
+    barLat = 1.358121
+    barLong = 103.767948
 
     distance = Math.sqrt((userLat - barLat) ** 2 + (userLong - barLong) ** 2 ) * 111
 
