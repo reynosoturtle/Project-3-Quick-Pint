@@ -91,12 +91,12 @@ class BarsController < ApplicationController
       end
     respond_to do |format|
       if @bar.update(bar_params)
-        if @bar.update(image: cloudinary_file["public_id"])
+        if params[:bar][:image]
+          @bar.update(image: cloudinary_file["public_id"])
           format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
           format.json { render :show, status: :ok, location: @bar }
         else
-          format.html { render :edit }
-          format.json { render json: @bar.errors, status: :unprocessable_entity }
+          bar_params[:image] = @bar.image #insert this into quickpint
         end
       else
         format.html { render :edit }
