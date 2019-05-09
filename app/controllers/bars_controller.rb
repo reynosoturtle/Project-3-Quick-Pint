@@ -42,12 +42,16 @@ class BarsController < ApplicationController
   # POST /bars.json
   def create
     @bar = Bar.new(bar_params)
+    p @bar
     uploaded_file = params[:bar][:image].path
     cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
     @bar.attributes = {:image => cloudinary_file["public_id"]}
-    p cloudinary_file
-    p cloudinary_file["public_id"]
+    # p cloudinary_file
+    # p cloudinary_file["public_id"]
     p @bar
+    days = @bar.business_hours.split('day')
+    p days
+    @bar.attributes = {:business_hours => days}
     if @bar.save == true
       redirect_to @bar
     else
@@ -130,7 +134,7 @@ class BarsController < ApplicationController
   end
 
   def distance
-  
+
   end
 
   def favorite
