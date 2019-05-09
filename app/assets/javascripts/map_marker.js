@@ -1,22 +1,30 @@
 //adding the marker with latlong
-function placeMarker() {
+function placeMarker(barName=null,barId = null) {
+
+    let placeName;
+
+    barName? placeName=barName:placeName=place.name
+
     if (marker) { marker.setMap(null) }
         marker = new google.maps.Marker({
             position: myLatLng,
-            title: place.name
+            title: barName
         });
 
     marker.setMap(map);
 
     //text to show inside the marker infoview
-    var contentString = '<strong>' + place.name + '</strong>' + '<div>Rating: ' + place.rating + ', ' + place.user_ratings_total + ' Google reviews</div>' + '</div>' + '<div>' + place.international_phone_number + '</div>'
+    if (!barName){
 
-    infowindow = new google.maps.InfoWindow({
-        content: contentString,
-    });
+        var contentString = '<strong>' + place.name + '</strong>' + '<div>Rating: ' + place.rating + ', ' + place.user_ratings_total + ' Google reviews</div>' + '</div>' + '<div>' + place.international_phone_number + '</div>'
 
-    //show the infoview when clicked
-    google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map, marker);
-    });
+        infowindow = new google.maps.InfoWindow({
+            content: contentString,
+        });
+
+        //show the infoview when clicked
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+        });
+    }
 };

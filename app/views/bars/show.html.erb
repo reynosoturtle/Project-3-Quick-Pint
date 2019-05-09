@@ -32,11 +32,11 @@
         <% end %>
         <%= link_to 'Back', bars_path, class: 'btn btn-secondary' %>
 
-
-
 <p>
   <strong>Name:</strong>
-  <%= @bar.name %>
+  <p id='placeName'>
+  	<%= @bar.name %>
+	</p>
 </p>
 
 <p>
@@ -61,7 +61,7 @@
   <%= @bar.address %>
 </p>
 
-<p style='display:none'>
+<p style='display:none' id='placeId'>
 	<%= @bar.place_id %>
 </p>
 

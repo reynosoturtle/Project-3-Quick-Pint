@@ -10,9 +10,6 @@ function initMap() {
     //show Singapore on map
     var Singapore = new google.maps.LatLng(1.3521, 103.8198);
 
-    //create infowindow
-    infowindow = new google.maps.InfoWindow();
-
     //positioning of map
     map = new google.maps.Map(
         document.getElementById('map'), { center: Singapore, zoom: 11 });
@@ -24,16 +21,16 @@ function initMap() {
 
     //if we are on the show bar page
     const pathName = window.location.pathname.split('/')
-    console.log(pathName);
-    console.log(isNaN(parseInt(pathName[2])));
 
-    if (pathName[1] === 'bars' && (typeof parseInt(pathName[2]) === 'number')){
+    if (pathName[1] === 'bars' && (parseInt(pathName[2]) > -1)){
+        const name = document.getElementById("placeName").innerText;
+        const placeId = document.getElementById("placeId").innerText;
 
-        const lat = document.getElementById("latitude").innerHTML
-        const long = document.getElementById("longitude").innerHTML
+        const lat = document.getElementById("latitude").innerText;
+        const long = document.getElementById("longitude").innerText;
         myLatLng = new google.maps.LatLng(lat, long);
 
-        placeMarker();
-        // alert("hello");
+        placeMarker(name,placeId);
+
     }
 };
