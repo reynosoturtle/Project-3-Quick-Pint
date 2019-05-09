@@ -8,8 +8,10 @@
 
   <p>
     <%= form.label :business_hours, 'Business Hours' %><br>
-    <%= form.time_field :business_hours %>
+    <%= form.text_field :business_hours %>
   </p>
+
+	<%= cl_image_tag(@bar.image) %><br>
 
   <p>
  		<%= form.label :image, 'Upload Bar Image' %><br>

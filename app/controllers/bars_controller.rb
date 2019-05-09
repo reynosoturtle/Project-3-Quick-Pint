@@ -52,7 +52,7 @@ class BarsController < ApplicationController
     #   params[:bar][:business_hours]
     # end
     uploaded_file = params[:bar][:image].path
-    cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
+    cloudinary_file = Cloudinary::Uploader.upload(uploaded_file, :folder => "quick-pint")
     @bar.attributes = {:image => cloudinary_file["public_id"]}
     # p cloudinary_file
     # p cloudinary_file["public_id"]
@@ -80,32 +80,31 @@ class BarsController < ApplicationController
   def update
 
       @bar = Bar.find(params[:id])
-      uploaded_file = params[:bar][:image].path
-      cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
-      puts cloudinary_file["public_id"]
-      @bar.attributes = {:image => cloudinary_file["public_id"]}
-      p @bar
-
-    if @bar.update(bar_params)
-      if @bar.update(image: cloudinary_file["public_id"])
-        format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bar }
+      if params[:bar][:image] #insert this into quickpint
+        uploaded_file = params[:bar][:image].path
+        cloudinary_file = Cloudinary::Uploader.upload(uploaded_file, :folder => "quick-pint")
+        puts cloudinary_file["public_id"]
+        @bar.attributes = {:image => cloudinary_file["public_id"]}
+        p @bar
       else
-        render 'edit'
+        bar_params[:image] = @bar.image #insert this into quickpint
       end
-    else
-      render 'edit'
+    respond_to do |format|
+      if @bar.update(bar_params)
+        if params[:bar][:image]
+          @bar.update(image: cloudinary_file["public_id"])
+          format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
+          format.json { render :show, status: :ok, location: @bar }
+        else
+          bar_params[:image] = @bar.image #insert this into quickpint
+          format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
+          format.json { render :show, status: :ok, location: @bar }
+        end
+      else
+        format.html { render :edit }
+        format.json { render json: @bar.errors, status: :unprocessable_entity }
+      end
     end
-
-    # respond_to do |format|
-    #   if @bar.update(bar_params)
-    #     format.html { redirect_to @bar, notice: "Bar was successfully updated." }
-    #     format.json { render :show, status: :ok, location: @bar }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @bar.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # DELETE /bars/1
