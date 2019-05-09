@@ -10,8 +10,6 @@
 	}
 </style>
 
-<input></input>
-
 <div id='map'></div>
 <script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
 
@@ -43,19 +41,15 @@
   <%= @bar.address %>
 </p>
 
-<p>
-  <strong>Type of Bar:</strong>
-
+<p style="display:none">
   <%= @bar.place_id %>
 </p>
 
-<p>
-  <strong>Latitude:</strong>
+<p style="display:none">
   <%= @bar.lat %>
 </p>
 
-<p>
-  <strong>Longtitude:</strong>
+<p style="display:none">
   <%= @bar.long %>
 </p>
 

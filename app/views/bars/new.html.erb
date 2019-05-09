@@ -39,18 +39,18 @@
     <%= form.text_field :address, id:'address' %>
   </p>
 
-	<p>
+	<p style="display:none">
     <%= form.label :place_id, 'Place_Id' %><br>
     <%= form.hidden_field :place_id, id:'place_id' %>
   </p>
 
-	<p>
+	<p style="display:none">
     <%= form.label :lat, 'Latitude' %><br>
     <%= form.hidden_field :lat, class: :text_field, step: :any, id:'lat'  %>
   </p>
 
-	<p>
-    <%= form.label :long, 'Longtitude' %><br>
+	<p style="display:none">
+    <%= form.label :long, 'Longitude' %><br>
     <%= form.hidden_field :long, class: :text_field, step: :any, id:'long'  %>
   </p>
 
