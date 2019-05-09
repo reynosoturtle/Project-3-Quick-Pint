@@ -24,13 +24,16 @@ function initMap() {
 
     //if we are on the show bar page
     const pathName = window.location.pathname.split('/')
-    console.log(pathName)
+    console.log(pathName);
     console.log(isNaN(parseInt(pathName[2])));
-    if (pathName[1] === 'bars' && !isNaN(parseInt(pathName[2]))){
-        const lat = place.geometry.location.lat();
-        const long = place.geometry.location.lng();
-        myLatLng = new google.maps.LatLng(lat, long);
-        alert('we are on the show page')
-    }
 
+    if (pathName[1] === 'bars' && (typeof parseInt(pathName[2]) === 'number')){
+
+        const lat = document.getElementById("latitude").innerHTML
+        const long = document.getElementById("longitude").innerHTML
+        myLatLng = new google.maps.LatLng(lat, long);
+
+        placeMarker();
+        // alert("hello");
+    }
 };
