@@ -4,7 +4,7 @@ class Bars < ActiveRecord::Migration[5.2]
      t.string :name
      t.text :image, default: "", null: true
      t.string :address
-     t.string :business_hours, default: [], array: true
+     t.string :business_hours
      t.string "place_id"
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "long", precision: 10, scale: 6

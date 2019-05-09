@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_05_08_023715) do
     t.string "name"
     t.text "image", default: ""
     t.string "address"
-    t.string "business_hours", default: [], array: true
+    t.string "business_hours"
     t.string "place_id"
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "long", precision: 10, scale: 6
