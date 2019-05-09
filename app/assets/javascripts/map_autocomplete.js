@@ -24,7 +24,7 @@ function fillUpFields() {
     //input the data retrieved from google into the text fields
     document.getElementById("name").value = place.name;
     document.getElementById("address").value = place.formatted_address;
-    document.getElementById("hours").value = place.opening_hours.weekday_text;
+    document.getElementById("hours").value = place.opening_hours.weekday_text.join(",")
     //saving these to db because we need them for map markers (these will be hidden fields on views)
     document.getElementById("lat").value = lat;
     document.getElementById("long").value = long;
