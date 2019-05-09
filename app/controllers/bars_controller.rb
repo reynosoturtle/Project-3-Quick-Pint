@@ -97,6 +97,8 @@ class BarsController < ApplicationController
           format.json { render :show, status: :ok, location: @bar }
         else
           bar_params[:image] = @bar.image #insert this into quickpint
+          format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
+          format.json { render :show, status: :ok, location: @bar }
         end
       else
         format.html { render :edit }
