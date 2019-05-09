@@ -25,9 +25,10 @@
 </p>
 
 <p>
-  <strong>Business hours:</strong>
-
-  <%= @bar.business_hours %><br>
+  <strong>Business hours:</strong><br>
+  <% @bar.business_hours.split(',').each do |day| %>
+    <%= day %><br>
+  <% end %>
 </p>
 
 <p>
