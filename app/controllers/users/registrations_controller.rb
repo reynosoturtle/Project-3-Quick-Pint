@@ -10,8 +10,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
+  ##trying to play around with using an emailer here
+  ## "In our case, we want the email to be sent out when a new user signs up, so we will place it in our users controller.""
   # def create
-  #   super
+  #   @user = User.new(user_params)
+  #     if @user.save
+  #       UserMailer.welcome_email(@user).deliver_now
+  #     end
   # end
 
   # GET /resource/edit
