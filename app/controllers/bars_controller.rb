@@ -80,11 +80,15 @@ class BarsController < ApplicationController
   def update
 
       @bar = Bar.find(params[:id])
-      uploaded_file = params[:bar][:image].path
-      cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
-      puts cloudinary_file["public_id"]
-      @bar.attributes = {:image => cloudinary_file["public_id"]}
-      p @bar
+      if params[:bar][:image] #insert this into quickpint
+        uploaded_file = params[:bar][:image].path
+        cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
+        puts cloudinary_file["public_id"]
+        @bar.attributes = {:image => cloudinary_file["public_id"]}
+        p @bar
+      else
+        bar_params[:image] = @bar.image #insert this into quickpint
+      end
     respond_to do |format|
       if @bar.update(bar_params)
         if @bar.update(image: cloudinary_file["public_id"])
