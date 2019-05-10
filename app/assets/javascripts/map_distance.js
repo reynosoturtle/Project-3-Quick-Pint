@@ -1,19 +1,27 @@
-if (window.location.pathname == "/bars" || window.location.pathname == "/") {
+if (window.location.pathname == '/bars' || window.location.pathname == '/') {
 
     navigator.geolocation.getCurrentPosition(position => {
 
-        const lat = position.coords.latitude
-        const long = position.coords.longitude
+        const myLat = position.coords.latitude
+        const myLong = position.coords.longitude
 
-        fetch("/getdistance", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ lat: lat, long: long })
-        })
-        .then(res => {
-            res.json().then(res => console.log(res))
-        })
+        let barCoords = document.querySelectorAll('.latLong')
+
+        for (let i = 0; i< barCoords.length;i++){
+
+            const barDistArr = barCoords[i].innerHTML.split(',')
+            for (let j in barDistArr){
+                barDistArr[j]=parseFloat(barDistArr[j])
+
+            }
+            console.log(barDistArr)
+
+            const distance = Math.sqrt(Math.pow((myLat-barDistArr[0]),2)+Math.pow((myLong-barDistArr[1]),2)) * 110.567
+
+            console.log(distance)
+
+            barCoords[i].innerText = distance
+            barCoords[i].style.visibility = 'visible'
+        }
     })
 }

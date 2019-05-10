@@ -5,7 +5,7 @@ class BarsController < ApplicationController
   #doing the set bar allows it to universally adopt the private properties for the crud + fav for the setbar.
   before_action :set_bar, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite]
   before_action :authenticate_user!, except: [:show, :index]
-  protect_from_forgery except: [:pen]
+  protect_from_forgery except: [:getdistance]
 
   # GET /bars
   # GET /bars.json
@@ -115,25 +115,6 @@ class BarsController < ApplicationController
       format.html { redirect_to bars_url, notice: 'Bar was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-
-  def calculate
-    userLat = params[:lat]
-    userLong = params[:long]
-
-    barLat = 1.358121
-    barLong = 103.767948
-
-    distance = Math.sqrt((userLat - barLat) ** 2 + (userLong - barLong) ** 2 ) * 111
-
-    #write ur formula here
-    msg = {:yourDistance => distance}
-    render :json => msg
-  end
-
-  def distance
-
   end
 
   def favorite
