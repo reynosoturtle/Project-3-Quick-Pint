@@ -42,26 +42,16 @@ class BarsController < ApplicationController
   # POST /bars.json
   def create
 
-   # params[:bar][:business_hours] = params[:bar][:business_hours].split(',')
-    p "-=8===================D"
-    p params
-        @bar = Bar.new(bar_params)
-        p @bar
-    # p params[:bar].split('')
-    # params[:bar][:business_hours].each do |day|
-    #   params[:bar][:business_hours]
-    # end
+
+    @bar = Bar.new(bar_params)
     uploaded_file = params[:bar][:image].path
     cloudinary_file = Cloudinary::Uploader.upload(uploaded_file, :folder => "quick-pint")
     @bar.attributes = {:image => cloudinary_file["public_id"]}
-    # p cloudinary_file
-    # p cloudinary_file["public_id"]
-    p @bar
+
     if @bar.save == true
       redirect_to @bar
     else
       render 'new'
-      byebug
     end
 
     # respond_to do |format|

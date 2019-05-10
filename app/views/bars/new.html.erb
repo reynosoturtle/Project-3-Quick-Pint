@@ -7,7 +7,7 @@
 		height: 400px;
 		width: 500px;
 	}
-	input{
+	#autoComplete{
 		width: 200px;
 	}
 </style>
@@ -60,17 +60,12 @@
   </p>
 
 	<p>
-    <!-- <%= form.label :category_id, 'Type of Bar' %><br> -->
+    <%= form.label :category_id, 'Type of Bar' %><br>
     <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
   </p>
 
-	<!--<p>
-    <%= form.label :owner_id, 'Owner Bar' %><br>-->
+    <%# form.label :owner_id, 'Owner Bar' %>
     <%= form.hidden_field :owner_id, :value => current_user.id%>
-
-  <!--</p> -->
-
-
 
 	<p>
     <%= form.submit %>
