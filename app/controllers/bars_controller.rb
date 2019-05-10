@@ -5,7 +5,7 @@ class BarsController < ApplicationController
   #doing the set bar allows it to universally adopt the private properties for the crud + fav for the setbar.
   before_action :set_bar, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite]
   before_action :authenticate_user!, except: [:show, :index]
-  protect_from_forgery except: [:pen]
+  protect_from_forgery except: [:getdistance]
 
   # GET /bars
   # GET /bars.json
@@ -43,18 +43,14 @@ class BarsController < ApplicationController
   def create
 
     @bar = Bar.new(bar_params)
-    p @bar
     uploaded_file = params[:bar][:image].path
-    cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
+    cloudinary_file = Cloudinary::Uploader.upload(uploaded_file, :folder => "quick-pint")
     @bar.attributes = {:image => cloudinary_file["public_id"]}
-    # p cloudinary_file
-    # p cloudinary_file["public_id"]
-    p @bar
+
     if @bar.save == true
       redirect_to @bar
     else
       render 'new'
-      byebug
     end
 
     # respond_to do |format|
@@ -73,32 +69,31 @@ class BarsController < ApplicationController
   def update
 
       @bar = Bar.find(params[:id])
-      uploaded_file = params[:bar][:image].path
-      cloudinary_file = Cloudinary::Uploader.upload(uploaded_file)
-      puts cloudinary_file["public_id"]
-      @bar.attributes = {:image => cloudinary_file["public_id"]}
-      p @bar
-
-    if @bar.update(bar_params)
-      if @bar.update(image: cloudinary_file["public_id"])
-        format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bar }
+      if params[:bar][:image] #insert this into quickpint
+        uploaded_file = params[:bar][:image].path
+        cloudinary_file = Cloudinary::Uploader.upload(uploaded_file, :folder => "quick-pint")
+        puts cloudinary_file["public_id"]
+        @bar.attributes = {:image => cloudinary_file["public_id"]}
+        p @bar
       else
-        render 'edit'
+        bar_params[:image] = @bar.image #insert this into quickpint
       end
-    else
-      render 'edit'
+    respond_to do |format|
+      if @bar.update(bar_params)
+        if params[:bar][:image]
+          @bar.update(image: cloudinary_file["public_id"])
+          format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
+          format.json { render :show, status: :ok, location: @bar }
+        else
+          bar_params[:image] = @bar.image #insert this into quickpint
+          format.html { redirect_to @bar, notice: 'Bar was successfully updated.' }
+          format.json { render :show, status: :ok, location: @bar }
+        end
+      else
+        format.html { render :edit }
+        format.json { render json: @bar.errors, status: :unprocessable_entity }
+      end
     end
-
-    # respond_to do |format|
-    #   if @bar.update(bar_params)
-    #     format.html { redirect_to @bar, notice: "Bar was successfully updated." }
-    #     format.json { render :show, status: :ok, location: @bar }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @bar.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # DELETE /bars/1
@@ -109,25 +104,6 @@ class BarsController < ApplicationController
       format.html { redirect_to bars_url, notice: 'Bar was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-
-  def pen
-    userLat = params[:lat]
-    userLong = params[:long]
-
-    barLat = 1.3580476
-    barLong = 103.7664238
-
-    distance = Math.sqrt((userLat - barLat) ** 2 + (userLong - barLong) ** 2 ) * 111
-
-    #write ur formula here
-    msg = {:yourDistance => distance}
-    render :json => msg
-  end
-
-  def distance
-
   end
 
   def favorite

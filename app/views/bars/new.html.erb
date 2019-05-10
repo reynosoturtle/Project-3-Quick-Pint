@@ -7,12 +7,12 @@
 		height: 400px;
 		width: 500px;
 	}
-	input{
+	#autoComplete{
 		width: 200px;
 	}
 </style>
 
-<input></input>
+<input id='autoComplete'></input>
 
 <div id='map'></div>
 <script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
@@ -39,18 +39,18 @@
     <%= form.text_field :address, id:'address' %>
   </p>
 
-	<p>
+	<p style="display:none">
     <%= form.label :place_id, 'Place_Id' %><br>
     <%= form.hidden_field :place_id, id:'place_id' %>
   </p>
 
-	<p>
+	<p style="display:none">
     <%= form.label :lat, 'Latitude' %><br>
     <%= form.hidden_field :lat, class: :text_field, step: :any, id:'lat'  %>
   </p>
 
-	<p>
-    <%= form.label :long, 'Longtitude' %><br>
+	<p style="display:none">
+    <%= form.label :long, 'Longitude' %><br>
     <%= form.hidden_field :long, class: :text_field, step: :any, id:'long'  %>
   </p>
 
@@ -60,17 +60,12 @@
   </p>
 
 	<p>
-    <!-- <%= form.label :category_id, 'Type of Bar' %><br> -->
+    <%= form.label :category_id, 'Type of Bar' %><br>
     <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
   </p>
 
-	<!--<p>
-    <%= form.label :owner_id, 'Owner Bar' %><br>-->
+    <%# form.label :owner_id, 'Owner Bar' %>
     <%= form.hidden_field :owner_id, :value => current_user.id%>
-
-  <!--</p> -->
-
-
 
 	<p>
     <%= form.submit %>

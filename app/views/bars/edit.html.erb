@@ -8,8 +8,10 @@
 
   <p>
     <%= form.label :business_hours, 'Business Hours' %><br>
-    <%= form.time_field :business_hours %>
+    <%= form.text_field :business_hours %>
   </p>
+
+	<%= cl_image_tag(@bar.image) %><br>
 
   <p>
  		<%= form.label :image, 'Upload Bar Image' %><br>
@@ -22,18 +24,9 @@
   </p>
 
 	<p>
-    <%= form.label :place_id, 'Place_Id' %><br>
-    <%= form.text_field :place_id %>
-  </p>
-
-	<p>
-    <%= form.label :lat, 'Latitude' %><br>
-    <%= form.number_field :lat, class: :text_field, step: :any  %>
-  </p>
-
-	<p>
-    <%= form.label :long, 'Longtitude' %><br>
-    <%= form.number_field :long, class: :text_field, step: :any  %>
+    <%= form.hidden_field :place_id %>
+    <%= form.hidden_field :lat, class: :text_field, step: :any  %>
+    <%= form.hidden_field :long, class: :text_field, step: :any  %>
   </p>
 
 	<p>
@@ -43,7 +36,7 @@
 
 	<p>
     <%= form.label :category_id, 'Type of Bar' %><br>
-    <%= form.collection_select :category_id, @categories, :id, :name %>
+    <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
   </p>
 
 	<p>
@@ -55,6 +48,7 @@
     <%= form.submit %>
   </p>
 <% end %>
+
 <%= link_to 'Back', bars_path, class: 'btn btn-secondary' %>
 <%= link_to 'Destroy', bar_path(@bar),
         			method: :delete,

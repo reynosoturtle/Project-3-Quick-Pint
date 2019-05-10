@@ -1,4 +1,15 @@
-<p id="notice"><%= notice %></p>
+<style>
+	#map{
+		border: 1px solid black;
+		margin: 10px 0px;
+		height: 400px;
+		width: 500px;
+	}
+</style>
+
+<script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
+
+<p id='notice'><%= notice %></p>
 
         <% if user_signed_in? %>
           <% if current_user.favorited?(@bar) %>
@@ -18,9 +29,13 @@
         <% end %>
         <%= link_to 'Back', bars_path, class: 'btn btn-secondary' %>
 
+<div id='map'></div>
+
 <p>
   <strong>Name:</strong>
-  <%= @bar.name %>
+  <p id='placeName'>
+  	<%= @bar.name %>
+	</p>
 </p>
 
 <p>
@@ -37,7 +52,6 @@
 		<% else %>
 			<%= cl_image_tag(@bar.image, :width => 200) %>
 		<% end %>
-
 </p>
 
 <p>
@@ -45,20 +59,16 @@
   <%= @bar.address %>
 </p>
 
-<p>
-  <strong>Place_id:</strong>
-
-  <%= @bar.place_id %>
+<p style='display:none' id='placeId'>
+	<%= @bar.place_id %>
 </p>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @bar.lat %>
+<p style='display:none' id='latitude'>
+	<%= @bar.lat %>
 </p>
 
-<p>
-  <strong>Longtitude:</strong>
-  <%= @bar.long %>
+<p style='display:none' id='longitude'>
+	<%= @bar.long %>
 </p>
 
 <p>
