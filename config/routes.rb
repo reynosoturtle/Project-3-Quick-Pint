@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'favorite', on: :member
     get 'unfavorite', on: :member
     #member is a ruby native syntax. A member route will require an ID, because it acts on a member
+    resources :promos
   end
   get 'favorites' => "favorites#index"
   root to: "bars#index"

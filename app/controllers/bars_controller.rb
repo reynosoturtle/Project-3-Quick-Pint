@@ -10,7 +10,7 @@ class BarsController < ApplicationController
   # GET /bars
   # GET /bars.json
   def index
-    @bars = Bar.order(created_at: :desc)
+    @bars = Bar.all.order(created_at: :desc)
     @users = User.all
     @page_title = 'Bars'
     #make the header dynamic
@@ -19,7 +19,7 @@ class BarsController < ApplicationController
   # GET /bars/1
   # GET /bars/1.json
   def show
-    @bar = Bar.find(params[:id])
+    @promos = @bar.promos
     # @category = Category.all
 
   end
@@ -41,7 +41,6 @@ class BarsController < ApplicationController
   # POST /bars
   # POST /bars.json
   def create
-
 
     @bar = Bar.new(bar_params)
     uploaded_file = params[:bar][:image].path

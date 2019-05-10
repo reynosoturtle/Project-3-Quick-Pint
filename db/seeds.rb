@@ -27,17 +27,22 @@ Category.create(name: 'Background Music')
 
 p "SEEDED category DATA"
 
-
+Owner.all.destroy_all
+Bar.all.destroy_all
 10.times do
   o = Owner.create(email: Faker::Internet.email,
                    name: Faker::Name.name,
                    password: 'legend')
   5.times do
-    o.bars.create(name: Faker::Restaurant.name,
-                  # category: Faker::Restaurant.type,
-                  address: Faker::Address.street_address)
-                  # opening_hour: "0930",
-                  # closing_hour: "2200")
+    bar = o.bars.create(name: Faker::Restaurant.name,
+                  address: Faker::Address.street_address,
+                  business_hours:'0930-2200')
+    5.times do
+    bar.promos.create(name: "Beer Promotion!",
+                 details: "$25 for 2 pints!",
+                 duration:"2 weeks")
+    end
+                  
   end
 end
 
