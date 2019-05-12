@@ -1,24 +1,23 @@
 <h1>New Bar</h1>
 
 <style>
-	#map{
-		border: 1px solid black;
+	#map {
+		border: 3px solid black;
 		margin: 10px 0px;
 		height: 400px;
-		width: 500px;
-	}
-	#autoComplete{
-		width: 200px;
+		width: 690px;
 	}
 </style>
 
-<input id='autoComplete'></input>
-
-<div id='map'></div>
-<script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
 
 
 <%= form_with scope: :bar, url: bars_path, local: true do |form| %>
+
+  <input id='autoComplete'></input>
+
+  <div id='map'></div>
+  <script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
+
   <p>
     <%= form.label :name, 'Bar Name' %><br>
     <%= form.text_field :name, id:'name' %>
@@ -61,7 +60,9 @@
 
 	<p>
     <%= form.label :category_id, 'Type of Bar' %><br>
-    <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
+    <div style="float:left;">
+      <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
+    </div>
   </p>
 
     <%# form.label :owner_id, 'Owner Bar' %>

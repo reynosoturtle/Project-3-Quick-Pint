@@ -108,13 +108,13 @@ class BarsController < ApplicationController
 
   def favorite
     current_user.favorite(@bar)
-    redirect_to root_path
+    redirect_back(fallback_location:root_path)
   end
 
   def unfavorite
     current_user.unfavorite(@bar)
     #write conditions to find which page i'm on and redirect me to favorites page instead of returning back to index
-    redirect_to root_path
+    redirect_back(fallback_location:root_path)
 
   end
 

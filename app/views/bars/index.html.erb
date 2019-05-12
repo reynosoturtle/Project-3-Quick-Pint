@@ -8,7 +8,7 @@
           [48-(3*4)]/3 = 12
           12 * 30 = 360
         -->
-        <div class="bars-list">
+        <div id="bars-list" class="bars-list">
           <% @bars.each do |bar| %>
             <%= link_to bar_path(bar), :action => 'go' do %>
               <div class="card-container">
@@ -32,7 +32,7 @@
 
                     <p>
                       <div class="left-text">Price per pint</div>
-                      <div class="right-text">$<%= bar.avg_price %></div>
+                      <div class="right-text price">$<%= bar.avg_price %></div>
                       <div class="dotted"></div>
                     </p>
                   </div>
