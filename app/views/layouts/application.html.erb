@@ -5,30 +5,79 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+
+    <link rel="stylesheet" href="https://use.typekit.net/saa5ypr.css">
+
+
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <h1><%= @page_title if @page_title.present? %></h1>
-    <!-- Checks if on favorites page -->
-    <% if request.env['PATH_INFO'] == "/favorites" %>
-      <%= link_to 'Back', bars_path, class: 'btn btn-secondary' %>
-    <% else %>
-      <%= link_to 'My Favourites',favorites_path, class: 'btn btn-secondary' %>
-    <% end %>
+    <!-- Logo -->
+    <div class="logo"><%= link_to image_tag('logo.png', width: 274), bars_path %></div>
+    <!-- Search, options and hamburger -->
+    <div class="menus-container">
+      <%# Checks current page %>
+      <% if request.env['PATH_INFO'] == "/" ||
+            request.env['PATH_INFO'] == "/bars" ||
+            # request.env['PATH_INFO'] == "/favorites" ||
+            request.env['PATH_INFO'] == "/mybars" %>
+        <div class="search"><a><%= image_tag 'search.png', width: 63 %></a></div>
+        <div class="options" onclick="toggleOpt()"><a><%= image_tag 'options.png', width: 63 %></a></div>
+      <% end %>
+
+      <div class="hamburger"><a><img id="burgerIcon" src='/assets/hamburger.png' width="63" onclick="toggleNav()"></a></div>
+
+    </div>
+
+    <div id="nav" style="display: none;">
+        <ul>
+          <li><%= link_to 'home', bars_path %></li>
+
+          <% if user_signed_in? %>
+            <li><%= link_to 'my favorites',favorites_path %></li>
+          <% end %>
+
+          <% if user_signed_in? && current_user.type == 'Owner' %>
+            <li>my bars</li>
+          <% end %>
+
+          <% if user_signed_in? %>
+            <li><%= link_to 'logout', destroy_user_session_url, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'login', new_user_session_url %></li>
+          <% end %>
+        </ul>
+    </div>
+
+    <div id="options" style="display: none;">
+      <div class="options-header">filter by</div>
+      <div class="options-filter">
+        <span>Distance</span>
+        <span style="margin-left: -6px;"><%= select_tag(:filterDistance, options_for_select([['Less than 500m', 1], ['Less than 1km', 2], ['More than 1km', 3]])) %></span>
+
+        <span>Price</span>
+        <span style="margin-left: -6px;"><%= select_tag(:filterPrice, options_for_select([['Less than $10', 1], ['Less than $20', 2], ['More than $20', 3]])) %></span>
+      </div>
+      <div class="options-header">sort by</div>
+      <div class="options-sort">
+        <span>Distance</span>
+        <span style="margin-left: -6px;"><%= select_tag(:sortDistance, options_for_select([['Lowest to highest', 1], ['Highest to lowest', 2]])) %></span>
+
+        <span>Price</span>
+        <span style="margin-left: -6px;"><%= select_tag(:sortPrice, options_for_select([['Lowest to highest', 1], ['Highest to Lowest', 2]])) %></span>
+      </div>
+    </div>
+
+
+    <%= yield %>
 
     <!-- Checks if user is a bar owner -->
     <% if user_signed_in? && current_user.type == 'Owner' %>
       <%= link_to 'New Bar', new_bar_path, class: 'btn btn-secondary'  %>
     <% end %>
 
-    <!-- Normal User -->
-    <% if user_signed_in? %>
-      <%= link_to 'Log Out', destroy_user_session_url, method: :delete, class: 'btn btn-secondary'  %>
-      <% else %>
-      <%= link_to 'Log In', new_user_session_url, class: 'btn btn-secondary'  %>
-    <% end %>
-    <%= yield %>
   </body>
+
 </html>

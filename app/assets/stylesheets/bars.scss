@@ -1,3 +1,287 @@
 // Place all the styles related to the bars controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.page-header-container {
+  position: relative;
+  width: 100vw;
+  height: 149px;
+  background: #f3cd56;
+  margin: 121px 0 0 -8px;
+
+  header {
+    font-family: futura-pt, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 80px;
+    width: 100vw;
+    text-align: center;
+
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.bars-list {
+  width: 100vw;
+}
+
+.card-container {
+  position: relative;
+  width: 357px;
+  height: 417px;
+  // border: 3px black solid;
+  margin: 91px 9px 0px 84px;
+  float: left;
+  // background: white;
+
+  .card-body {
+    width: 297px;
+    border: 3px black solid;
+    margin: -3px 0 0 -3px;
+    background: white;
+    padding-bottom: 15px;
+  }
+
+  .card-image {
+    width: 297px;
+    height: 297px;
+    border: 3px black solid;
+    margin: -3px 0 0 -3px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      border: 3px black solid;
+      margin: -3px 0 0 -3px;
+    }
+  }
+
+  h1 {
+    padding: 10px 25px 0 25px;
+  }
+
+  .card-promos {
+    // position: relative;
+    // height: 57px;
+    // width: 267px;
+    // border: 3px black solid;
+    // background: white;
+    // margin: -271px 0 0 192px;
+    // transform-origin: 50% 50%;
+    // transform: rotate(90deg);
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 58px -3px 0 0;
+
+    .card-promos-text {
+      // position: absolute;
+      // top: 50%;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
+      // width: 100%;
+      // text-align: center;
+
+      font-family: futura-pt, sans-serif;
+      font-weight: 500;
+      font-style: normal;
+      font-size: 16px;
+
+      writing-mode: vertical-rl;
+      border: 3px black solid;
+      white-space: nowrap;
+      padding: 60px 18px;
+      background: white;
+      // transform: rotate(180deg);
+    }
+  }
+
+  .card-favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 58px;
+    width: 57px;
+    border: 3px black solid;
+    background: white;
+    margin: -3px -3px 0px 10px;
+
+    img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+h1 {
+  font-family: futura-pt, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+
+}
+
+p {
+  font-family: futura-pt, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+.left-text,.right-text {
+  padding: 1px 25px 1px 5px;
+  background: #fff;
+  float: right;
+  height: 1em;
+  margin-top: -5px;
+}
+
+.left-text {
+  padding: 1px 5px 1px 25px;
+  float: left;
+  clear: both;
+  height: 1em;
+}
+
+.dotted {
+  margin-top: -5px;
+  margin-bottom: 2px;
+  height: 1em;
+  background-image: linear-gradient(to right, black 15%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+}
+
+.absolute-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ###################################
+// #         Show bar page           #
+// ###################################
+
+.show-bar-container {
+  position: absolute;
+  top: 330px;
+  left: 50%;
+  transform: translateX(-50%);
+  // border: 1px red solid;
+  width: 58.5vw;
+
+  .icon-border {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    background: white;
+    border: 3px black solid;
+  }
+
+  .show-bar-layer {
+    position: relative;
+    width: 100%;
+    float: left;
+    margin: 0;
+  }
+
+  .show-bar-categories {
+    margin-right: 87px;
+  }
+
+  .show-bar-categories, .show-bar-favorite, .show-bar-hh{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .show-bar-hh, .show-bar-image {
+    margin-top: -3px;
+  }
+
+  .show-bar-image {
+    position: relative;
+    background: white;
+    border: 3px black solid;
+    width: 749px;
+    height: 360px;
+    display: inline-block;
+
+    img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 747px;
+      max-height: 357px;
+    }
+  }
+
+  // .show-bar-location-label {
+  //   position: relative;
+  //   top: 0;
+  //   left: 0;
+  //   margin: -7px 0 0 0;
+  //   float: left;
+  // }
+
+  // .show-bar-location-body {
+  //   float: left;
+  //   background: white;
+  //   border: 3px black solid;
+  //   width: 749px;
+  //   height: 360px;
+  //   margin: -7px 0 0 -3px;
+  // }
+
+  .show-bar-location {
+    margin-top: -6px;
+    float: left;
+    display: inline-block;
+  }
+
+  .show-bar-business-hours, .show-bar-promos {
+    margin-top: -3px;
+    float: left;
+    display: inline-block;
+  }
+
+  .body-before-label, .body-after-label {
+    padding: 45px;
+    background: white;
+    border: 3px black solid;
+    width: 659px;
+  }
+
+  .label-after-body, .body-after-label {
+    margin-left: -3px;
+  }
+
+}
+
+
+
+// Futura PT Heavy
+// font-family: futura-pt, sans-serif;
+// font-weight: 700;
+// font-style: normal;
+
+
+// Futura PT Book
+// font-family: futura-pt, sans-serif;
+// font-weight: 400;
+// font-style: normal;
+
+
+// Futura PT Bold
+// font-family: futura-pt-bold, sans-serif;
+// font-weight: 700;
+// font-style: normal;
+
