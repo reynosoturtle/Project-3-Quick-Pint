@@ -24,13 +24,35 @@ body {
   background-image: linear-gradient(to right, #c69e30 1px, transparent 1px), linear-gradient(to bottom, #c69e30 1px, transparent 1px);
 }
 
+#loader {
+  background: #f3cd56;
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, #c69e30 1px, transparent 1px), linear-gradient(to bottom, #c69e30 1px, transparent 1px);
+  z-index: 500;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  .absolute-center {
+    position: absolute;
+    left: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    width: 273px;
+    height: auto;
+    margin: 20px 0 0 15px;
+  }
+}
+
 #nav {
   background: #f3cd56;
   background-size: 30px 30px;
   background-image: linear-gradient(to right, #c69e30 1px, transparent 1px), linear-gradient(to bottom, #c69e30 1px, transparent 1px);
   z-index: 200;
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -38,7 +60,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -150%);
+    transform: translate(-50%, -50%);
     list-style: none;
 
     li {

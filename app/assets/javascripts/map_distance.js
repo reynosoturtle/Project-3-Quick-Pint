@@ -3,6 +3,7 @@ if (window.location.pathname == '/bars' || window.location.pathname == '/') {
     console.log('requesting for user longlat')
     console.log('loading')
     // put loader here
+    // document.getElementById('loader').style.display = "block"
 
     navigator.geolocation.getCurrentPosition(position => {
 
@@ -38,7 +39,7 @@ if (window.location.pathname == '/bars' || window.location.pathname == '/') {
             // clear loader here
             if (i == barCoords.length - 1) {
               console.log('done loading')
-              document.body.style.visibility = 'visible'
+              document.getElementById('loader').style.display = "none"
             }
         }
     })
