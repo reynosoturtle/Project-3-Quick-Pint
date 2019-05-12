@@ -1,9 +1,11 @@
-<h1>New Bar</h1>
+<div class="page-header-container">
+  <header>new bar</header>
+</div>
 
 <style>
 	#map {
 		border: 3px solid black;
-		margin: 10px 0px;
+		margin: 10px 0px 20px 0px;
 		height: 400px;
 		width: 690px;
 	}
@@ -19,54 +21,36 @@
   <script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
 
   <p>
-    <%= form.label :name, 'Bar Name' %><br>
-    <%= form.text_field :name, id:'name' %>
+    <%= form.text_field :name, id:'name', placeholder: 'Bar Name' %>
   </p>
 
 	<p>
-    <%= form.label :business_hours, 'Business Hours' %><br>
-    <%= form.text_field :business_hours, id:'hours' %>
+    <%= form.text_field :business_hours, id:'hours', placeholder: 'Business Hours' %>
+  </p>
+
+  <p>
+    <%= form.text_field :address, id:'address', placeholder: 'Bar Address' %>
   </p>
 
 	<p>
-    <%= form.label :image, 'Upload Bar Image' %><br>
     <%= form.file_field :image %>
   </p>
 
 	<p>
-    <%= form.label :address, 'Bar Address' %><br>
-    <%= form.text_field :address, id:'address' %>
-  </p>
-
-	<p style="display:none">
-    <%= form.label :place_id, 'Place_Id' %><br>
-    <%= form.hidden_field :place_id, id:'place_id' %>
-  </p>
-
-	<p style="display:none">
-    <%= form.label :lat, 'Latitude' %><br>
-    <%= form.hidden_field :lat, class: :text_field, step: :any, id:'lat'  %>
-  </p>
-
-	<p style="display:none">
-    <%= form.label :long, 'Longitude' %><br>
-    <%= form.hidden_field :long, class: :text_field, step: :any, id:'long'  %>
-  </p>
-
-	<p>
-    <%= form.label :avg_price, 'Average Price (S$)' %><br>
-    <%= form.number_field :avg_price, class: :text_field, step: :any %>
+    <%= form.number_field :avg_price, class: :text_field, step: :any, placeholder: 'Average Price Per Pint' %>
   </p>
 
 	<p>
     <%= form.label :category_id, 'Type of Bar' %><br>
-    <div style="float:left;">
+    <ul>
       <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
-    </div>
+    </ul>
   </p>
 
-    <%# form.label :owner_id, 'Owner Bar' %>
     <%= form.hidden_field :owner_id, :value => current_user.id%>
+    <%= form.hidden_field :place_id, id:'place_id' %>
+    <%= form.hidden_field :lat, class: :text_field, step: :any, id:'lat'  %>
+    <%= form.hidden_field :long, class: :text_field, step: :any, id:'long'  %>
 
 	<p>
     <%= form.submit %>

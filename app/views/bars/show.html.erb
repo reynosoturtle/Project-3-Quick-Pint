@@ -118,7 +118,7 @@
     <div class="show-bar-promos body-after-label">
 
       <% if @promos.present? %>
-        <h1><%= @bar.promos[0].duration %></h1>
+        <!-- <h1><%= @bar.promos[0].duration %></h1> -->
         <% @promos.each do |promo| %>
 
           <p>
@@ -220,11 +220,11 @@
     No promotions available right now
   <% end %>
 </p>
-
+ -->
         <%# Checks if user is owner of bar %>
         <% if user_signed_in? && current_user.id == @bar.owner_id %>
           <td><%= link_to 'Edit', edit_bar_path(@bar), class: 'btn btn-secondary' %> </td>
           <td><%= link_to 'Destroy', @bar, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary' %></td>
           <td><%= link_to 'Add Promotion', new_bar_promo_path(@bar) %></td>
         <% end %>
-        <%= link_to 'Back', bars_path, class: 'btn btn-secondary' %> -->
+        <%= link_to 'Back', bars_path, class: 'btn btn-secondary' %>

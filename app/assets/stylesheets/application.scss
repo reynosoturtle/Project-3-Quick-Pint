@@ -218,12 +218,60 @@ input, textarea, form[type="submit"] {
   font-weight: 400;
   font-style: normal;
   font-size: 16px;
-  width: 600px
+  width: 600px;
+  margin: 10px auto;
 }
 
 input[type="checkbox"] {
-  width: auto;
+  width: 300px;
+  position: absolute; // take it out of document flow
+  opacity: 0; // hide it
+
+  & + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  // Box.
+  & + label:before {
+    content: '';
+    margin: -6px 20px 30px 0;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border: 3px black solid;
+  }
+
+  // Box hover
+  &:hover + label:before {
+    background: black;
+  }
+
+  // Box focus
+  // &:focus + label:before {
+  //   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+  // }
+
+  // Box checked
+  &:checked + label:before {
+    background: white;
+  }
+
+  // Checkmark. Could be replaced with an image
+  &:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 2.5px;
+    background: black;
+    width: 20px;
+    height: 20px;
+  }
 }
+
 
 label {
   margin-right: 60px;
@@ -274,3 +322,10 @@ select {
 // form.form p.required label, form.form span.required label {
 //     font-weight:normal;
 // }
+
+.form-position {
+  position: absolute;
+  left: 50%;
+  top: 140px;
+  transform: translateX(-50%);
+}
