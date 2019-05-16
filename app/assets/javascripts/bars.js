@@ -37,122 +37,122 @@ var toggleOpt = function () {
   }
 }
 
-var sortDistance = function (order) {
-  var list = document.getElementById('bars-list');
+// var sortDistance = function (order) {
+//   var list = document.getElementById('bars-list');
 
-  var nodesToSort  = list.querySelectorAll('.card-container');
-  Array.prototype.map.call(nodesToSort, function(node) {
-    return {
-      node: node,
-      relevantText: node.children[0].children[0].children[1].querySelector('.latLong').innerHTML
-    };
-  }).sort(function(a, b) {
-    // console.log(a, b);
-    if (order == 'asc') {
-      return a.relevantText.localeCompare(b.relevantText);
-    } else if (order == 'desc') {
-      return b.relevantText.localeCompare(a.relevantText);
-    }
-  }).forEach(function(item) {
-    list.appendChild(item.node);
-  });
-}
+//   var nodesToSort  = list.querySelectorAll('.card-container');
+//   Array.prototype.map.call(nodesToSort, function(node) {
+//     return {
+//       node: node,
+//       relevantText: node.children[0].children[0].children[1].querySelector('.latLong').innerHTML
+//     };
+//   }).sort(function(a, b) {
+//     // console.log(a, b);
+//     if (order == 'asc') {
+//       return a.relevantText.localeCompare(b.relevantText);
+//     } else if (order == 'desc') {
+//       return b.relevantText.localeCompare(a.relevantText);
+//     }
+//   }).forEach(function(item) {
+//     list.appendChild(item.node);
+//   });
+// }
 
-var sortPrice = function (order) {
-  var list = document.getElementById('bars-list');
+// var sortPrice = function (order) {
+//   var list = document.getElementById('bars-list');
 
-  var nodesToSort  = list.querySelectorAll('.card-container');
-  Array.prototype.map.call(nodesToSort, function(node) {
-    return {
-      node: node,
-      relevantText: node.children[0].children[0].children[1].querySelector('.price').innerHTML
-    };
-  }).sort(function(a, b) {
-    // console.log(a, b);
-    if (order == 'asc') {
-      return a.relevantText.localeCompare(b.relevantText);
-    } else if (order == 'desc') {
-      return b.relevantText.localeCompare(a.relevantText);
-    }
-  }).forEach(function(item) {
-    list.appendChild(item.node);
-  });
-}
+//   var nodesToSort  = list.querySelectorAll('.card-container');
+//   Array.prototype.map.call(nodesToSort, function(node) {
+//     return {
+//       node: node,
+//       relevantText: node.children[0].children[0].children[1].querySelector('.price').innerHTML
+//     };
+//   }).sort(function(a, b) {
+//     // console.log(a, b);
+//     if (order == 'asc') {
+//       return a.relevantText.localeCompare(b.relevantText);
+//     } else if (order == 'desc') {
+//       return b.relevantText.localeCompare(a.relevantText);
+//     }
+//   }).forEach(function(item) {
+//     list.appendChild(item.node);
+//   });
+// }
 
-var filteringPrice = function (selectValue) {
-  var list = document.getElementById('bars-list');
+// var filteringPrice = function (selectValue) {
+//   var list = document.getElementById('bars-list');
 
-  var nodesToFilter  = list.querySelectorAll('.card-container');
-  Array.prototype.map.call(nodesToFilter, function(node) {
-    let theRelevantText = node.children[0].children[0].children[1].querySelector('.price').innerHTML.replace('$', '')
-    console.log('relevant text', theRelevantText, typeof theRelevantText)
-    return {
-      node: node,
-      relevantText: node.children[0].children[0].children[1].querySelector('.price').innerHTML.replace('$', '')
-    };
-  }).forEach(function(item) {
-    if (selectValue == 1) {
-      item.node.style.display = 'block'
-    } else if (selectValue == 2) {
-      if (parseFloat(item.relevantText) < 10) {
-        item.node.style.display = 'block'
-      } else {
-        item.node.style.display = 'none'
-      }
-    } else if (selectValue == 3) {
-      if (parseFloat(item.relevantText) < 20) {
-        item.node.style.display = 'block'
-      } else {
-        item.node.style.display = 'none'
-      }
-    } else if (selectValue == 4) {
-      if (parseFloat(item.relevantText) > 20) {
-        item.node.style.display = 'block'
-      } else {
-        item.node.style.display = 'none'
-      }
-    }
-  });
-}
+//   var nodesToFilter  = list.querySelectorAll('.card-container');
+//   Array.prototype.map.call(nodesToFilter, function(node) {
+//     let theRelevantText = node.children[0].children[0].children[1].querySelector('.price').innerHTML.replace('$', '')
+//     console.log('relevant text', theRelevantText, typeof theRelevantText)
+//     return {
+//       node: node,
+//       relevantText: node.children[0].children[0].children[1].querySelector('.price').innerHTML.replace('$', '')
+//     };
+//   }).forEach(function(item) {
+//     if (selectValue == 1) {
+//       item.node.style.display = 'block'
+//     } else if (selectValue == 2) {
+//       if (parseFloat(item.relevantText) < 10) {
+//         item.node.style.display = 'block'
+//       } else {
+//         item.node.style.display = 'none'
+//       }
+//     } else if (selectValue == 3) {
+//       if (parseFloat(item.relevantText) < 20) {
+//         item.node.style.display = 'block'
+//       } else {
+//         item.node.style.display = 'none'
+//       }
+//     } else if (selectValue == 4) {
+//       if (parseFloat(item.relevantText) > 20) {
+//         item.node.style.display = 'block'
+//       } else {
+//         item.node.style.display = 'none'
+//       }
+//     }
+//   });
+// }
 
-var filteringDistance = function (selectValue) {
-  var list = document.getElementById('bars-list');
+// var filteringDistance = function (selectValue) {
+//   var list = document.getElementById('bars-list');
 
-  var nodesToFilter  = list.querySelectorAll('.card-container');
-  Array.prototype.map.call(nodesToFilter, function(node) {
-    console.log('node', node, 'relevantText', node.children[0].children[0].children[1].querySelector('.latLong').innerHTML)
-    return {
-      node: node,
-      relevantText: node.children[0].children[0].children[1].querySelector('.latLong').innerHTML.replace(' m', '')
-    };
-  }).forEach(function(item) {
-    // console.log(item.relevantText)
-    console.log('node to hide', item.node);
-    if (selectValue == 1) {
-      item.node.style.display = 'block'
-    } else if (selectValue == 2) {
-      if (parseFloat(item.relevantText) < 500) {
-        item.node.style.display = 'block'
-      } else {
-        item.node.style.display = 'none'
-      }
-    } else if (selectValue == 3) {
-      if (parseFloat(item.relevantText) < 1000) {
-        item.node.style.display = 'block'
-        console.log('showing node',item.node)
-      } else {
-        item.node.style.display = 'none'
-        console.log('hidden node',item.node)
-      }
-    } else if (selectValue == 4) {
-      if (parseFloat(item.relevantText) > 1000) {
-        item.node.style.display = 'block'
-      } else {
-        item.node.style.display = 'none'
-      }
-    }
-  });
-}
+//   var nodesToFilter  = list.querySelectorAll('.card-container');
+//   Array.prototype.map.call(nodesToFilter, function(node) {
+//     console.log('node', node, 'relevantText', node.children[0].children[0].children[1].querySelector('.latLong').innerHTML)
+//     return {
+//       node: node,
+//       relevantText: node.children[0].children[0].children[1].querySelector('.latLong').innerHTML.replace(' m', '')
+//     };
+//   }).forEach(function(item) {
+//     // console.log(item.relevantText)
+//     console.log('node to hide', item.node);
+//     if (selectValue == 1) {
+//       item.node.style.display = 'block'
+//     } else if (selectValue == 2) {
+//       if (parseFloat(item.relevantText) < 500) {
+//         item.node.style.display = 'block'
+//       } else {
+//         item.node.style.display = 'none'
+//       }
+//     } else if (selectValue == 3) {
+//       if (parseFloat(item.relevantText) < 1000) {
+//         item.node.style.display = 'block'
+//         console.log('showing node',item.node)
+//       } else {
+//         item.node.style.display = 'none'
+//         console.log('hidden node',item.node)
+//       }
+//     } else if (selectValue == 4) {
+//       if (parseFloat(item.relevantText) > 1000) {
+//         item.node.style.display = 'block'
+//       } else {
+//         item.node.style.display = 'none'
+//       }
+//     }
+//   });
+// }
 
 function filterDistanceValue(value){
   // value === 2 ? return 1000 : value === 3 ? return 5000 : value === 4 ? return 10000 : return Infinity;
@@ -179,14 +179,6 @@ function filterPriceValue(value){
     return Infinity
   }
 }
-
-// function sortBy(value){
-//   value === 1 ? return "Distance" : value === 2 ? return "Price" ;
-// }
-
-// function sortVal(value){
-//   value === 1 ? return "Lowest to Highest" : value === 2 ? return "Highest to Lowest" ;
-// }
 
 function filterAndSort() {
   const filterCriteria = {
@@ -258,68 +250,68 @@ function filterAndSort() {
   image.src = './assets/hamburger.png'
 }
 
-var getFilterAndSort = function() {
-  var filterDistance = document.getElementById('filterDistance').value
-  var filterPrice = document.getElementById('filterPrice').value
-  var sortBy = document.getElementById('sortBy').value
-  var sortValue = document.getElementById('sortValue').value
-  console.log('filterDistance', filterDistance, 'filterPrice', filterPrice, 'sortBy', sortBy, 'sortValue', sortValue)
-  if (filterDistance == 1) {
-    //show all
-    filteringDistance(1)
-  } else if (filterDistance == 2) {
-    //less than 500
-    filteringDistance(2)
-  } else if (filterDistance == 3) {
-    //less than 1000
-    filteringDistance(3)
-  } else if (filterDistance == 4) {
-    //more than 1000
-    filteringDistance(4)
-  }
+// var getFilterAndSort = function() {
+//   var filterDistance = document.getElementById('filterDistance').value
+//   var filterPrice = document.getElementById('filterPrice').value
+//   var sortBy = document.getElementById('sortBy').value
+//   var sortValue = document.getElementById('sortValue').value
+//   console.log('filterDistance', filterDistance, 'filterPrice', filterPrice, 'sortBy', sortBy, 'sortValue', sortValue)
+//   if (filterDistance == 1) {
+//     //show all
+//     filteringDistance(1)
+//   } else if (filterDistance == 2) {
+//     //less than 500
+//     filteringDistance(2)
+//   } else if (filterDistance == 3) {
+//     //less than 1000
+//     filteringDistance(3)
+//   } else if (filterDistance == 4) {
+//     //more than 1000
+//     filteringDistance(4)
+//   }
 
-  if (filterPrice == 1) {
-    //show all
-    filteringPrice(1)
-  } else if (filterPrice == 2) {
-    //less than 10
-    filteringPrice(2)
-  } else if (filterPrice == 3) {
-    //less than 20
-    filteringPrice(3)
-  } else if (filterPrice == 4) {
-    //more than 20
-    filteringPrice(4)
-  }
+//   if (filterPrice == 1) {
+//     //show all
+//     filteringPrice(1)
+//   } else if (filterPrice == 2) {
+//     //less than 10
+//     filteringPrice(2)
+//   } else if (filterPrice == 3) {
+//     //less than 20
+//     filteringPrice(3)
+//   } else if (filterPrice == 4) {
+//     //more than 20
+//     filteringPrice(4)
+//   }
 
-  if (sortBy == 1) {
-    //distance
-    if (sortValue == 1) {
-      //lowest to highest
-      sortDistance('asc');
-    } else if (sortValue == 2) {
-      //highest to lowest
-      sortDistance('desc');
-    }
-  } else if (sortBy == 2) {
-    //price
-    if (sortValue == 1) {
-      //lowest to highest
-      sortPrice('asc');
-    } else if (sortValue == 2) {
-      //highest to lowest
-      sortPrice('desc');
-    }
-  }
+//   if (sortBy == 1) {
+//     //distance
+//     if (sortValue == 1) {
+//       //lowest to highest
+//       sortDistance('asc');
+//     } else if (sortValue == 2) {
+//       //highest to lowest
+//       sortDistance('desc');
+//     }
+//   } else if (sortBy == 2) {
+//     //price
+//     if (sortValue == 1) {
+//       //lowest to highest
+//       sortPrice('asc');
+//     } else if (sortValue == 2) {
+//       //highest to lowest
+//       sortPrice('desc');
+//     }
+//   }
 
-  opt = document.getElementById('options')
-  image = document.getElementById('burgerIcon')
-  // searchIcon = document.getElementById('search-icon')
-  optionsIcon = document.getElementById('options-icon')
+//   opt = document.getElementById('options')
+//   image = document.getElementById('burgerIcon')
+//   // searchIcon = document.getElementById('search-icon')
+//   optionsIcon = document.getElementById('options-icon')
 
-  // Close filter/sort and show buttons
-  opt.style.display = 'none'
-  // searchIcon.style.display = 'block'
-  optionsIcon.style.display = 'block'
-  image.src = './assets/hamburger.png'
-}
+//   // Close filter/sort and show buttons
+//   opt.style.display = 'none'
+//   // searchIcon.style.display = 'block'
+//   optionsIcon.style.display = 'block'
+//   image.src = './assets/hamburger.png'
+// }
