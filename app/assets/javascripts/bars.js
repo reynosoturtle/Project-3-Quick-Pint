@@ -84,6 +84,8 @@ var filteringPrice = function (selectValue) {
 
   var nodesToFilter  = list.querySelectorAll('.card-container');
   Array.prototype.map.call(nodesToFilter, function(node) {
+    let theRelevantText = node.children[0].children[0].children[1].querySelector('.price').innerHTML.replace('$', '')
+    console.log('relevant text', theRelevantText, typeof theRelevantText)
     return {
       node: node,
       relevantText: node.children[0].children[0].children[1].querySelector('.price').innerHTML.replace('$', '')
@@ -92,19 +94,19 @@ var filteringPrice = function (selectValue) {
     if (selectValue == 1) {
       item.node.style.display = 'block'
     } else if (selectValue == 2) {
-      if (item.relevantText < '10') {
+      if (parseFloat(item.relevantText) < 10) {
         item.node.style.display = 'block'
       } else {
         item.node.style.display = 'none'
       }
     } else if (selectValue == 3) {
-      if (item.relevantText < '20') {
+      if (parseFloat(item.relevantText) < 20) {
         item.node.style.display = 'block'
       } else {
         item.node.style.display = 'none'
       }
     } else if (selectValue == 4) {
-      if (item.relevantText > '20') {
+      if (parseFloat(item.relevantText) > 20) {
         item.node.style.display = 'block'
       } else {
         item.node.style.display = 'none'
@@ -118,27 +120,32 @@ var filteringDistance = function (selectValue) {
 
   var nodesToFilter  = list.querySelectorAll('.card-container');
   Array.prototype.map.call(nodesToFilter, function(node) {
+    console.log('node', node, 'relevantText', node.children[0].children[0].children[1].querySelector('.latLong').innerHTML)
     return {
       node: node,
-      relevantText: node.children[0].children[0].children[1].querySelector('.latLong').innerHTML
+      relevantText: node.children[0].children[0].children[1].querySelector('.latLong').innerHTML.replace(' m', '')
     };
   }).forEach(function(item) {
+    // console.log(item.relevantText)
+    console.log('node to hide', item.node);
     if (selectValue == 1) {
       item.node.style.display = 'block'
     } else if (selectValue == 2) {
-      if (item.relevantText < '500') {
+      if (parseFloat(item.relevantText) < 500) {
         item.node.style.display = 'block'
       } else {
         item.node.style.display = 'none'
       }
     } else if (selectValue == 3) {
-      if (item.relevantText < '1000') {
+      if (parseFloat(item.relevantText) < 1000) {
         item.node.style.display = 'block'
+        console.log('showing node',item.node)
       } else {
         item.node.style.display = 'none'
+        console.log('hidden node',item.node)
       }
     } else if (selectValue == 4) {
-      if (item.relevantText > '1000') {
+      if (parseFloat(item.relevantText) > 1000) {
         item.node.style.display = 'block'
       } else {
         item.node.style.display = 'none'
@@ -147,12 +154,116 @@ var filteringDistance = function (selectValue) {
   });
 }
 
+function filterDistanceValue(value){
+  // value === 2 ? return 1000 : value === 3 ? return 5000 : value === 4 ? return 10000 : return Infinity;
+  if (value == 2) {
+    return 1000
+  } else if (value == 3) {
+    return 5000
+  } else if (value == 4) {
+    return 10000
+  } else {
+    return Infinity
+  }
+}
+
+function filterPriceValue(value){
+  // value === 2 ? return 10 : value === 3 ? return 20 : value === 4 ? return 30 : return Infinity;
+  if (value == 2) {
+    return 10
+  } else if (value == 3) {
+    return 20
+  } else if (value == 4) {
+    return 30
+  } else {
+    return Infinity
+  }
+}
+
+// function sortBy(value){
+//   value === 1 ? return "Distance" : value === 2 ? return "Price" ;
+// }
+
+// function sortVal(value){
+//   value === 1 ? return "Lowest to Highest" : value === 2 ? return "Highest to Lowest" ;
+// }
+
+function filterAndSort() {
+  const filterCriteria = {
+    filterDistance: filterDistanceValue(document.getElementById('filterDistance').value),
+    filterPrice: filterPriceValue(document.getElementById('filterPrice').value),
+    sortBy: document.getElementById('sortBy').value,
+    // 1 = distance, 2 = price
+    sortValue: document.getElementById('sortValue').value,
+    // 1 = lowest to highest, 2 = highest to lowest
+  }
+  console.log("filterCriteria object")
+  console.log(filterCriteria);
+  const list = document.getElementById('bars-list');
+  const cards = document.querySelectorAll('.card-container');
+
+  Array.prototype.map.call(cards, function(node) {
+    return {
+      node: node,
+      distanceText: parseFloat(node.children[0].children[0].children[1].querySelector('.latLong').innerHTML.replace(' m', '')),
+      priceText: parseFloat(node.children[0].children[0].children[1].querySelector('.price').innerHTML.replace('$', ''))
+    };
+    }).sort(function(a, b) {
+      //sort by distance
+    if (filterCriteria.sortBy == 1) {
+      if (filterCriteria.sortValue == 1) {
+        //sort from lowest to highest
+        console.log('sorting DISTANCE low to high')
+        return a.distanceText - b.distanceText
+      } else {
+        //sort from highest to lowest
+        console.log('sorting DISTANCE high to low')
+        return b.distanceText - a.distanceText
+      }
+    } else if (filterCriteria.sortBy == 2) {
+      if (filterCriteria.sortValue == 1) {
+        console.log('sorting PRICE low to high')
+        return a.priceText - b.priceText
+      } else {
+        console.log('sorting PRICE high to low')
+        return b.priceText - a.priceText
+      }
+    }
+    }).forEach(function(item) {
+        list.appendChild(item.node);
+        console.log('item price', item.priceText)
+        console.log('filter criteria', filterCriteria.filterPrice)
+        console.log('testing condition', parseFloat(item.priceText) > filterCriteria.filterPrice)
+        item.node.style.display = 'block'
+        // console.log(parseFloat(item.distanceText))
+
+        if (parseFloat(item.distanceText) > filterCriteria.filterDistance) {
+          item.node.style.display = 'none'
+        }
+
+        if (parseFloat(item.priceText) > filterCriteria.filterPrice) {
+          item.node.style.display = 'none'
+          console.log('hide', item)
+        }
+    });
+  opt = document.getElementById('options')
+  image = document.getElementById('burgerIcon')
+  // searchIcon = document.getElementById('search-icon')
+  optionsIcon = document.getElementById('options-icon')
+
+  // Close filter/sort and show buttons
+  opt.style.display = 'none'
+  // searchIcon.style.display = 'block'
+  optionsIcon.style.display = 'block'
+  image.src = './assets/hamburger.png'
+}
+
 var getFilterAndSort = function() {
   var filterDistance = document.getElementById('filterDistance').value
   var filterPrice = document.getElementById('filterPrice').value
   var sortBy = document.getElementById('sortBy').value
   var sortValue = document.getElementById('sortValue').value
-
+  console.log('filterDistance', filterDistance, 'filterPrice', filterPrice, 'sortBy', sortBy, 'sortValue', sortValue)
   if (filterDistance == 1) {
     //show all
     filteringDistance(1)
@@ -203,12 +314,12 @@ var getFilterAndSort = function() {
 
   opt = document.getElementById('options')
   image = document.getElementById('burgerIcon')
-  searchIcon = document.getElementById('search-icon')
+  // searchIcon = document.getElementById('search-icon')
   optionsIcon = document.getElementById('options-icon')
 
   // Close filter/sort and show buttons
   opt.style.display = 'none'
-  searchIcon.style.display = 'block'
+  // searchIcon.style.display = 'block'
   optionsIcon.style.display = 'block'
   image.src = './assets/hamburger.png'
 }

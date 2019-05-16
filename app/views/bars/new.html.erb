@@ -12,7 +12,7 @@
 </style>
 
 
-
+<div class='form-position'>
 <%= form_with scope: :bar, url: bars_path, local: true do |form| %>
 
   <input id='autoComplete'></input>
@@ -56,5 +56,6 @@
     <%= form.submit %>
   </p>
 <% end %>
+</div>
 
 <%= link_to 'Back', bars_path %>

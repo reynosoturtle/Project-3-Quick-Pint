@@ -12,39 +12,34 @@ Category.destroy_all #We delete all entries for type first before we create new 
 # create an array with these categories in the new bar form
 Category.create(name: 'Bar')
 Category.create(name: 'Club')
-Category.create(name: 'Fine Dining')
-Category.create(name: 'Café/Bistro')
-Category.create(name: 'Restaurant')
+Category.create(name: 'Pub')
 
 Category.create(name: 'Air-conditioned')
 Category.create(name: 'Smoking Allowed')
-Category.create(name: 'Large Groups')
 Category.create(name: 'Family-friendly')
-
-Category.create(name: 'Live Band')
-Category.create(name: 'Karaoke')
-Category.create(name: 'Background Music')
 
 p "SEEDED category DATA"
 
 Owner.all.destroy_all
 Bar.all.destroy_all
-10.times do
+5.times do
   o = Owner.create(email: Faker::Internet.email,
                    name: Faker::Name.name,
                    password: 'legend')
-  5.times do
+  2.times do
     bar = o.bars.create(name: Faker::Restaurant.name,
                   address: Faker::Address.street_address,
                   business_hours:'0930-2200')
     5.times do
     bar.promos.create(name: "Beer Promotion!",
-                 details: "$25 for 2 pints!",
+                 detail: "$25 for 2 pints!",
                  duration:"2 weeks")
     end
-                  
+
   end
 end
+
+
 
 p "SEEDED owner and bars DATA"
 
