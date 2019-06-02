@@ -11,6 +11,10 @@ module Quickpint
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    #set time zone to be Singapore
+    config.time_zone = "Singapore"
+    config.active_record.time_zone_aware_types = [:datetime, :time]
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

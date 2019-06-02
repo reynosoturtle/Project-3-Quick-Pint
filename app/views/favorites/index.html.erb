@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header-container">
+  <header>bars</header>
+</div>
+
+
+<div class="bars-list">
+<% @favorites.each do |favorite| %>
+  <% bar = Bar.find(favorite.favoritable_id) %>
+    <%= link_to bar_path(bar), :action => 'go' do %>
+      <div class="card-container">
+        <div class="card-body">
+          <div class="card-image">
+            <% if bar.image == nil %>
+              <%= '' %>
+            <% else %>
+              <%= cl_image_tag(bar.image) %>
+            <% end %>
+          </div>
+          <div class="card-details">
+            <h1><%= bar.name %></h1>
+            <p>
+              <div class="left-text">Distance</div>
+              <div class='latLong right-text' style='visibility:hidden'>
+                <%= bar.lat %>, <%= bar.long %>
+              </div>
+              <div class="dotted"></div>
+            </p>
+
+            <p>
+              <div class="left-text">Price per pint</div>
+              <div class="right-text">$<%= bar.avg_price %></div>
+              <div class="dotted"></div>
+            </p>
+          </div>
+        </div>
+        <div class="card-promos">
+          <%# if happy hour available lmao %>
+            <div class="card-promos-text">
+              Happy Hour available!
+            </div>
+        </div>
+        <div class="card-favorite">
+          <%# if haven't fav %>
+          <% if user_signed_in? %>
+            <% if current_user.favorited?(bar) %>
+              <%= link_to image_tag('faved.png', width: 35), unfavorite_bar_path(bar) %>
+            <% else %>
+              <%= link_to image_tag('fav.png', width: 35), favorite_bar_path(bar) %>
+            <% end %>
+          <% else %>
+            <%= link_to image_tag('fav.png', width: 35), new_user_registration_path %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+
+

@@ -1,6 +1,56 @@
 <h1>Editing Bar</h1>
 
-<%= render 'form', bar: @bar %>
+<%= form_with scope: :bar, model: @bar, local: true do |form| %>
+  <p>
+    <%= form.label :name, 'Bar Name' %><br>
+    <%= form.text_field :name %>
+  </p>
 
-<%= link_to 'Show', @bar %> |
-<%= link_to 'Back', bars_path %>
+  <p>
+    <%= form.label :business_hours, 'Business Hours' %><br>
+    <%= form.text_field :business_hours %>
+  </p>
+
+	<%= cl_image_tag(@bar.image) %><br>
+
+  <p>
+ 		<%= form.label :image, 'Upload Bar Image' %><br>
+		<%= form.file_field :image %>
+  </p>
+
+  <p>
+  	 <%= form.label :address, 'Bar Address' %><br>
+    <%= form.text_field :address %>
+  </p>
+
+	<p>
+    <%= form.hidden_field :place_id %>
+    <%= form.hidden_field :lat, class: :text_field, step: :any  %>
+    <%= form.hidden_field :long, class: :text_field, step: :any  %>
+  </p>
+
+	<p>
+    <%= form.label :avg_price, 'Average Price (S$)' %><br>
+    <%= form.number_field :avg_price, class: :text_field, step: :any %>
+  </p>
+
+	<p>
+    <%= form.label :category_id, 'Type of Bar' %><br>
+    <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
+  </p>
+
+	<p>
+    <%= form.label :owner_id, 'Owner Bar' %><br>
+    <%= form.collection_select :owner_id, @owners, :id, :name %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', bars_path, class: 'btn btn-secondary' %>
+<%= link_to 'Destroy', bar_path(@bar),
+        			method: :delete,
+        			data: { confirm: 'Are you sure you want to delete this bar?' },
+							class: 'btn btn-secondary' %>

@@ -1,0 +1,335 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+@import "bars";
+
+body {
+  background: #f3cd56;
+  font-family: futura-pt, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, #c69e30 1px, transparent 1px), linear-gradient(to bottom, #c69e30 1px, transparent 1px);
+}
+
+#loader {
+  background: #f3cd56;
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, #c69e30 1px, transparent 1px), linear-gradient(to bottom, #c69e30 1px, transparent 1px);
+  z-index: 500;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  .absolute-center {
+    position: absolute;
+    left: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    width: 273px;
+    height: auto;
+    margin: 20px 0 0 15px;
+  }
+}
+
+#nav {
+  background: #f3cd56;
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, #c69e30 1px, transparent 1px), linear-gradient(to bottom, #c69e30 1px, transparent 1px);
+  z-index: 200;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+
+    li {
+      font-family: futura-pt, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 80px;
+      text-align: center;
+    }
+  }
+}
+
+#options {
+  background: #f3cd56;
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, #c69e30 1px, transparent 1px), linear-gradient(to bottom, #c69e30 1px, transparent 1px);
+  z-index: 200;
+
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  .options-vertical-list {
+    width: 900px;
+    padding: 0;
+    margin: 120px auto 0 auto;
+    list-style: none;
+
+    li {
+      width: 900px;
+      height: 90px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .options-header {
+      font-family: futura-pt, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 80px;
+      white-space: nowrap;
+    }
+
+    .options-filter-list, .options-sort-list {
+      list-style: none;
+      width: 900px;
+      margin: 0 auto;
+      padding: 0;
+
+      li {
+        width: 420px;
+        // background: white;
+        height: 60px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.logo {
+  position: fixed;
+  top: 29px;
+  left: 28px;
+  z-index: 300;
+}
+
+.menus-container {
+  position: fixed;
+  top: 29px;
+  right: 28px;
+  z-index: 300;
+  width: 300px;
+
+  .hamburger, .options, .search {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .options {
+    margin-right: 60px;
+  }
+
+  .search {
+    margin-right: 120px;
+  }
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.span-style {
+  font-family: futura-pt, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+
+  border: 3px black solid;
+  white-space: nowrap;
+  padding: 15px 45px;
+  background: white;
+}
+
+h2 {
+  font-family: futura-pt, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 21px;
+
+  border: 3px black solid;
+  white-space: nowrap;
+  padding: 30px 60px;
+  background: white;
+  margin: 0;
+}
+
+h3, h4 {
+  font-family: futura-pt, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 21px;
+
+  writing-mode: vertical-rl;
+  border: 3px black solid;
+  white-space: nowrap;
+  padding: 60px 28.5px;
+  background: white;
+  margin: 0;
+}
+
+h4 {
+  transform: rotate(180deg);
+  margin: 0;
+}
+
+form {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translateX(-50%);
+  margin: -1.5px 0 0 -1.5px;
+}
+
+input, textarea, form[type="submit"] {
+  background-color: white;
+  border:solid 3px black;
+  color: black;
+  padding: 15px 45px;
+
+  font-family: futura-pt, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  width: 600px;
+  margin: 10px auto;
+}
+
+input[type="checkbox"] {
+  width: 300px;
+  position: absolute; // take it out of document flow
+  opacity: 0; // hide it
+
+  & + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  // Box.
+  & + label:before {
+    content: '';
+    margin: -6px 20px 30px 0;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border: 3px black solid;
+  }
+
+  // Box hover
+  &:hover + label:before {
+    background: black;
+  }
+
+  // Box focus
+  // &:focus + label:before {
+  //   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+  // }
+
+  // Box checked
+  &:checked + label:before {
+    background: white;
+  }
+
+  // Checkmark. Could be replaced with an image
+  &:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 2.5px;
+    background: black;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+label {
+  margin-right: 60px;
+}
+
+select {
+  background-color: white;
+  border:solid 0px black;
+  color: black;
+  padding: 15px 45px;
+
+  font-family: futura-pt, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+*:focus {
+    outline: none;
+}
+
+// form.form p label {
+//    font-size:16px;
+//    color:#000000;
+//    font-weight:normal;
+//    padding-top:15px;
+//    padding-bottom:15px;
+// }
+// form.form p.submit input {
+//    background-color:#FFFFFF;
+//    border:solid 3px #000000;
+//    font-size:16px;
+//    color:#000000;
+//    font-weight:bold;
+//    padding-top:15px;
+//    padding-bottom:15px;
+//    padding-right:30px;
+//    padding-left:30px;
+//    -moz-border-radius:0px;
+//    -webkit-border-radius:0px;
+//    border-radius:0px;
+// }
+// form.form p.submit {
+//    margin-top:60px;
+//    margin-bottom:0px;
+//    text-align:center;
+// }
+// form.form p.required label, form.form span.required label {
+//     font-weight:normal;
+// }
+
+.form-position {
+  position: absolute;
+  left: 50%;
+  top: 140px;
+  transform: translateX(-50%);
+}
+
+.shared-links-position {
+
+}

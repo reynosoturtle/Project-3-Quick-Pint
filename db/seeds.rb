@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -6,35 +8,38 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Type.destroy_all #We delete all entries for type first before we create new types when seed file is run
+Category.destroy_all #We delete all entries for type first before we create new types when seed file is run
 # create an array with these categories in the new bar form
-# Type.create(name: 'Bar')
-# Type.create(name: 'Club')
-# Type.create(name: 'Fine Dining')
-# Type.create(name: 'Café/Bistro')
-# Type.create(name: 'Restaurant')
+Category.create(name: 'Bar')
+Category.create(name: 'Club')
+Category.create(name: 'Pub')
 
-# Type.create(name: 'Air-conditioned')
-# Type.create(name: 'Smoking Allowed')
-# Type.create(name: 'Large Groups')
-# Type.create(name: 'Family-friendly')
+Category.create(name: 'Air-conditioned')
+Category.create(name: 'Smoking Allowed')
+Category.create(name: 'Family-friendly')
 
-# Type.create(name: 'Live Band')
-# Type.create(name: 'Karaoke')
-# Type.create(name: 'Background Music')
+p "SEEDED category DATA"
 
-20.times do
+Owner.all.destroy_all
+Bar.all.destroy_all
+5.times do
   o = Owner.create(email: Faker::Internet.email,
                    name: Faker::Name.name,
-                   password: "legend",
-                   role: "owner")
-  5.times do
-    o.bars.create(name: Faker::Restaurant.name,
-                  category: Faker::Restaurant.type,
+                   password: 'legend')
+  2.times do
+    bar = o.bars.create(name: Faker::Restaurant.name,
                   address: Faker::Address.street_address,
-                  opening_hour: "0930",
-                  closing_hour: "2200")
+                  business_hours:'0930-2200')
+    5.times do
+    bar.promos.create(name: "Beer Promotion!",
+                 detail: "$25 for 2 pints!",
+                 duration:"2 weeks")
+    end
+
   end
 end
 
-puts "SEEDED type data"
+
+
+p "SEEDED owner and bars DATA"
+

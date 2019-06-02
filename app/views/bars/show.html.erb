@@ -1,19 +1,230 @@
-<p id="notice"><%= notice %></p>
+<style>
+	#map {
+		border: 1px solid black;
+		margin: 35px auto 0 auto;
+		height: 300px;
+		width: 85%;
+	}
 
-<p>
+  .show-left-text,.show-right-text {
+  padding: 1px 45px 1px 5px;
+  background: #fff;
+  float: right;
+  height: 1em;
+  margin-top: -5px;
+}
+
+.show-left-text {
+  padding: 1px 5px 1px 45px;
+  float: left;
+  clear: both;
+  height: 1em;
+}
+
+.show-dotted {
+  margin-top: -5px;
+  margin-bottom: 2px;
+  height: 1em;
+  background-image: linear-gradient(to right, black 15%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+}
+</style>
+
+<script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
+
+<p id='notice'><%= notice %></p>
+        <!--
+          [48-(10*2)]-4 = 24
+          24 * 30 = 720
+        -->
+
+<div class="page-header-container">
+  <header><%= @bar.name %></header>
+</div>
+
+<div class="show-bar-container">
+
+  <div class="show-bar-layer">
+    <div class="show-bar-photos-label" style="display: inline-block;"><h2>Photo</h2></div>
+    <div class="show-bar-categories" style="display: inline-block;">
+      <h2>
+        <% @bar.categories.each do |cat| %>
+          <% if cat.equal? @bar.categories.last %>
+            <%= cat.name %>
+          <% else %>
+            <%= cat.name %>,
+          <% end %>
+        <% end %>
+      </h2>
+    </div>
+    <div class="show-bar-favorite" style="display: inline-block;">
+      <div class="icon-border">
+        <div class="absolute-center">
+          <% if user_signed_in? %>
+            <% if current_user.favorited?(@bar) %>
+              <%= link_to image_tag('faved.png', width: 35), unfavorite_bar_path(@bar) %>
+            <% else %>
+              <%= link_to image_tag('fav.png', width: 35), favorite_bar_path(@bar) %>
+            <% end %>
+          <% else %>
+            <%= link_to image_tag('fav.png', width: 35), new_user_registration_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="show-bar-layer">
+    <div class="show-bar-image">
+      <% if @bar.image == nil %>
+        <%= '' %>
+      <% else %>
+        <%= cl_image_tag(@bar.image) %>
+      <% end %>
+    </div>
+    <div class="show-bar-hh"><h3>Happy Hour now!</h3></div>
+  </div>
+
+  <div class="show-bar-layer">
+    <div class="show-bar-location label-before-body"><h4>Location</h4></div>
+    <div class="show-bar-location body-after-label">
+      <p>
+        <div class="show-left-text">Address</div>
+        <div class="show-right-text"><%= @bar.address %></div>
+        <div class="show-dotted"></div>
+      </p>
+      <div id='map'></div>
+    </div>
+  </div>
+
+  <div class="show-bar-layer">
+    <div class="show-bar-business-hours body-before-label">
+      <% @bar.business_hours.split(',').each do |day| %>
+        <% daySplit = day.split(': ') %>
+        <p>
+          <div class="show-left-text"><%= daySplit[0] %></div>
+          <div class="show-right-text"><%= daySplit[1] %></div>
+          <div class="show-dotted"></div>
+        </p>
+      <% end %>
+    </div>
+    <div class="show-bar-business-hours label-after-body"><h3>Business hours</h3></div>
+  </div>
+
+  <div class="show-bar-layer">
+    <div class="show-bar-promos label-before-body"><h4>Promos</h4></div>
+    <div class="show-bar-promos body-after-label">
+
+      <% if @promos.present? %>
+        <!-- <h1><%= @bar.promos[0].duration %></h1> -->
+        <% @promos.each do |promo| %>
+
+          <p>
+            <div class="show-left-text"><%= promo.name %></div>
+            <div class="show-right-text"><%= promo.detail %></div>
+            <div class="show-dotted"></div>
+            <%#= promo.duration %>
+          </p>
+        <% end %>
+      <% else %>
+        <p>No promotions available right now</p>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <p>
   <strong>Name:</strong>
-  <%= @bar.name %>
+  <p id='placeName'>
+  	<%= @bar.name %>
+	</p>
 </p>
 
 <p>
-  <strong>Business hours:</strong>
-  <%= @bar.business_hours %>
+  <strong>Business hours:</strong><br>
+  <% @bar.business_hours.split(',').each do |day| %>
+    <% daySplit = day.split(': ') %>
+    <p>
+      </div><div class="left-text"><%= daySplit[0] %></div>
+      <div class="right-text"><%= daySplit[1] %></div>
+      <div class="dotted"></div>
+    </p>
+  <% end %>
 </p>
 
 <p>
-  <strong>Images:</strong>
-  <%= @bar.images %>
+  <strong>Bar Image:</strong><br>
 </p>
 
-<%= link_to 'Edit', edit_bar_path(@bar) %> |
-<%= link_to 'Back', bars_path %>
+<p>
+  <strong>Bar Address:</strong>
+  <%= @bar.address %>
+</p>
+
+<p style='display:none' id='placeId'>
+	<%= @bar.place_id %>
+</p>
+
+<p style='display:none' id='latitude'>
+	<%= @bar.lat %>
+</p>
+
+<p style='display:none' id='longitude'>
+	<%= @bar.long %>
+</p>
+
+<p>
+  <strong>Bar Category:</strong><br>
+	<% @bar.categories.each do |cat| %>
+    <% if cat.equal? @bar.categories.last %>
+      <%= cat.name %>
+    <% else %>
+		  <%= cat.name %>,
+    <% end %>
+	<% end %>
+</p>
+<p>
+  <% if @promos.count > 1%>
+    <strong>Promotions:</strong>
+  <% else %>
+    <strong>Promotion:</strong>
+  <% end %>
+  <% if @promos.present? %>
+    <% @promos.each do |promo| %>
+      <br>
+      <%= promo.name %>
+      <br>
+      <%= promo.detail %>
+      <br>
+      <%= promo.duration %>
+      <br>
+      <%= link_to 'Edit', edit_bar_promo_path(@bar, promo) %>
+      <%= link_to 'Destroy', bar_promo_path(@bar, promo), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary' %>
+
+      <br>
+    <% end %>
+  <% else %>
+    No promotions available right now
+  <% end %>
+</p>
+ -->
+        <%# Checks if user is owner of bar %>
+        <% if user_signed_in? && current_user.id == @bar.owner_id %>
+          <td><%= link_to 'Edit', edit_bar_path(@bar), class: 'btn btn-secondary' %> </td>
+          <td><%= link_to 'Destroy', @bar, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary' %></td>
+          <td><%= link_to 'Add Promotion', new_bar_promo_path(@bar) %></td>
+        <% end %>
+        <%= link_to 'Back', bars_path, class: 'btn btn-secondary' %>

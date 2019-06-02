@@ -1,5 +1,61 @@
-<h1>New Bar</h1>
+<div class="page-header-container">
+  <header>new bar</header>
+</div>
 
-<%= render 'form', bar: @bar %>
+<style>
+	#map {
+		border: 3px solid black;
+		margin: 10px 0px 20px 0px;
+		height: 400px;
+		width: 690px;
+	}
+</style>
+
+
+<div class='form-position'>
+<%= form_with scope: :bar, url: bars_path, local: true do |form| %>
+
+  <input id='autoComplete'></input>
+
+  <div id='map'></div>
+  <script async type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC4vP8QnuK9A88LyIbgE9BzQw9G-1lMsGc&libraries=places&callback=initMap'></script>
+
+  <p>
+    <%= form.text_field :name, id:'name', placeholder: 'Bar Name' %>
+  </p>
+
+	<p>
+    <%= form.text_field :business_hours, id:'hours', placeholder: 'Business Hours' %>
+  </p>
+
+  <p>
+    <%= form.text_field :address, id:'address', placeholder: 'Bar Address' %>
+  </p>
+
+	<p>
+    <%= form.file_field :image %>
+  </p>
+
+	<p>
+    <%= form.number_field :avg_price, class: :text_field, step: :any, placeholder: 'Average Price Per Pint' %>
+  </p>
+
+	<p>
+    <%= form.label :category_id, 'Type of Bar' %><br>
+    <ul>
+      <%= form.collection_check_boxes :category_ids, @categories, :id, :name %>
+    </ul>
+  </p>
+
+    <%= form.hidden_field :owner_id, :value => current_user.id%>
+    <%= form.hidden_field :place_id, id:'place_id' %>
+    <%= form.hidden_field :lat, class: :text_field, step: :any, id:'lat'  %>
+    <%= form.hidden_field :long, class: :text_field, step: :any, id:'long'  %>
+
+	<p>
+    <%= form.submit %>
+  </p>
+<% end %>
+</div>
 
 <%= link_to 'Back', bars_path %>
