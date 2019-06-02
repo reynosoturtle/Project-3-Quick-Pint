@@ -27,4 +27,8 @@
 /config/master.key
 
 #Ignore the cloudinary API keys inside this file
-cloudinary.yml
+config/cloudinary.yml
+
+#DO NOT Ignore the secrets file that stores SECRET_KEY_BASE for the production env. We want to precompile assets locally
+!config/secrets.yml
+
