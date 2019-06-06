@@ -39,7 +39,5 @@ Bar.all.destroy_all
   end
 end
 
-
-
 p "SEEDED owner and bars DATA"
 
