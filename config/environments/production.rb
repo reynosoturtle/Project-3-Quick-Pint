@@ -20,7 +20,7 @@ Rails.application.configure do
 
   #trying to get production env to read this so that can precompile assets pipeline locally before deploying on heroku
   #source: https://stackoverflow.com/questions/51466887/missing-secret-key-base-for-production-environment
-  config.read_encrypted_secrets = true
+  #config.read_encrypted_secrets = true
 
 
   # Disable serving static files from the `/public` folder by default since
@@ -28,7 +28,9 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  # config.assets.js_compressor = :uglifier.new
+  config.assets.js_compressor = Uglifier.new(harmony: true)
+
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
