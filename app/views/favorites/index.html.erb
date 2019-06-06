@@ -1,57 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header-container">
+  <header>bars</header>
+</div>
 
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Business Hours </th>
-      <th>Images</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if user_signed_in? && @favorites.present? %>
-      <% @favorites.each do |favorite| %>
-        <% bar = Bar.find(favorite.favoritable_id) %>
-          <tr>
-            <td><%= bar.name %></td>
-             <td><%= bar.business_hours %></td>
-            <td>
-              <% if bar.image == nil %>
-                <%= '' %>
-              <% else %>
-                <%= cl_image_tag(bar.image, :width => 200) %>
-              <% end %>
-            </td>
-
-            <td><%= link_to 'Show', bar_path(bar) %></td>
-            <% if user_signed_in? %>
-              <% if current_user.favorited?(bar) %>
-
-
-              <%# To redirect back to favorites page if unfavorite was done in favorite page%>
-                <% if request.env['PATH_INFO'] == "/favorites" %>
-                  <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar) %></td>
-                <% end %>
-
-                <!--
-                <td><%= link_to 'Unfavourite', unfavorite_bar_path(bar) %></td>
-                -->
-              <% else %>
-                <td><%= link_to 'Favourite', favorite_bar_path(bar) %></td>
-              <% end %>
+<div class="bars-list">
+<% @favorites.each do |favorite| %>
+  <% bar = Bar.find(favorite.favoritable_id) %>
+    <%= link_to bar_path(bar), :action => 'go' do %>
+      <div class="card-container">
+        <div class="card-body">
+          <div class="card-image">
+            <% if bar.image == nil %>
+              <%= '' %>
             <% else %>
-              <td><%= link_to 'Favourite', new_user_registration_path %></td>
+              <%= cl_image_tag(bar.image) %>
             <% end %>
-            <!-- Checks if user is owner of bar -->
-            <% if user_signed_in? && current_user.id == bar.owner_id %>
-              <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
-              <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
+          </div>
+          <div class="card-details">
+            <h1><%= bar.name %></h1>
+            <p>
+              <div class="left-text">Distance</div>
+              <div class='latLong right-text' style='visibility:hidden'>
+                <%= bar.lat %>, <%= bar.long %>
+              </div>
+              <div class="dotted"></div>
+            </p>
 
-          </tr>
-        <% end %>
+            <p>
+              <div class="left-text">Price per pint</div>
+              <div class="right-text">$<%= bar.avg_price %></div>
+              <div class="dotted"></div>
+            </p>
+          </div>
+        </div>
+        <div class="card-promos">
+          <%# if happy hour available lmao %>
+            <div class="card-promos-text">
+              Happy Hour available!
+            </div>
+        </div>
+        <div class="card-favorite">
+          <%# if haven't fav %>
+          <% if user_signed_in? %>
+            <% if current_user.favorited?(bar) %>
+              <%= link_to image_tag('faved.png', width: 35), unfavorite_bar_path(bar) %>
+            <% else %>
+              <%= link_to image_tag('fav.png', width: 35), favorite_bar_path(bar) %>
+            <% end %>
+          <% else %>
+            <%= link_to image_tag('fav.png', width: 35), new_user_registration_path %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+</div>
+
+
+
+

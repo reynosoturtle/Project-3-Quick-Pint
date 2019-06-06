@@ -3,7 +3,7 @@ function autoCompleteField(){
 
     //location bound to Singapore's latlng
     autoComplete.bindTo('bounds', map);
-
+    console.log('request being sent')
     autoComplete.addListener('place_changed', () => { fillUpFields();
         placeMarker();
     });
@@ -21,6 +21,7 @@ function fillUpFields() {
     const long = place.geometry.location.lng();
     myLatLng = new google.maps.LatLng(lat, long);
 
+    console.log('forms are about to be filled')
     //input the data retrieved from google into the text fields
     document.getElementById("name").value = place.name;
     document.getElementById("address").value = place.formatted_address;
@@ -29,4 +30,6 @@ function fillUpFields() {
     document.getElementById("lat").value = lat;
     document.getElementById("long").value = long;
     document.getElementById("place_id").value = place.place_id;
+
+    console.log('forms are filled')
     };
