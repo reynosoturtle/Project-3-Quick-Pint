@@ -41,7 +41,10 @@
         -->
 
 <div class="page-header-container">
-  <header><%= @bar.name %></header>
+  <header id="placeName"><%= @bar.name %></header>
+  <span id="placeId" style="display: none;"><%= @bar.place_id %></span>
+  <span id="latitude" style="display: none;"><%= @bar.lat %></span>
+  <span id="longitude" style="display: none;"><%= @bar.long %></span>
 </div>
 
 <div class="show-bar-container">
@@ -146,13 +149,13 @@
 
 
 
-<!-- <p>
+<!--  <p>
   <strong>Name:</strong>
   <p id='placeName'>
   	<%= @bar.name %>
 	</p>
-</p>
-
+</p> -->
+<!--
 <p>
   <strong>Business hours:</strong><br>
   <% @bar.business_hours.split(',').each do |day| %>

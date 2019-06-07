@@ -1,131 +1,130 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Quickpint</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
+<head>
+  <title>Quickpint</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <link rel="stylesheet" href="https://use.typekit.net/saa5ypr.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-    <link rel="stylesheet" href="https://use.typekit.net/saa5ypr.css">
-
-
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
-
-  <body>
-    <!-- Loader -->
-    <% if request.env['PATH_INFO'] == "/" ||
+<body>
+  <!-- Loader -->
+  <% if request.env['PATH_INFO'] == "/" ||
             request.env['PATH_INFO'] == "/bars" %>
-      <div id="loader" style="display: block;">
-        <%= image_tag('loader.gif', class: "absolute-center" ) %>
-      </div>
-    <% end %>
-    <!-- Logo -->
-    <div class="logo"><%= link_to image_tag('logo.png', width: 274), root_path %></div>
-    <!-- Search, options and hamburger -->
-    <div class="menus-container">
-      <%# Checks current page %>
-      <% if request.env['PATH_INFO'] == "/" ||
+  <div id="loader" style="display: none;">
+    <%= image_tag('loader.gif', class: "absolute-center" ) %>
+  </div>
+  <% end %>
+  <!-- Logo -->
+  <div class="logo">
+    <%= link_to image_tag('logo.png', width: 274), root_path %>
+  </div>
+  <!-- Search, options and hamburger -->
+  <div class="menus-container">
+    <%# Checks current page %>
+    <% if request.env['PATH_INFO'] == "/" ||
             request.env['PATH_INFO'] == "/bars" ||
             # request.env['PATH_INFO'] == "/favorites" ||
             request.env['PATH_INFO'] == "/mybars" %>
-        <!-- <div id="search-icon" class="search"><a><%= image_tag 'search.png', width: 63 %></a></div> -->
-        <div id="options-icon" class="options" onclick="toggleOpt()"><a><%= image_tag 'options.png', width: 63 %></a></div>
+    <!-- <div id="search-icon" class="search"><a><%= image_tag 'search.png', width: 63 %></a></div> -->
+    <div id="options-icon" class="options" onclick="toggleOpt()"><a>
+        <%= image_tag 'options.png', width: 63 %></a></div>
+    <% end %>
+    <div id="hamburger-icon" class="hamburger" style="display: block;" onclick="toggleNav()"><a>
+        <!-- <img id="burgerIcon" src='/assets/hamburger.png' width="63" onclick="toggleNav()"> -->
+        <%= image_tag 'hamburger.png', width: 63 %>
+      </a></div>
+      <div id="close-icon" class="close" style="display: none;" onclick="toggleNav()"><a>
+        <!-- <img id="burgerIcon" src='/assets/hamburger.png' width="63" onclick="toggleNav()"> -->
+        <%= image_tag 'close.png', width: 63 %>
+      </a></div>
+  </div>
+  <div class="bar-buttons-container">
+    <% if request.env['PATH_INFO'] == "/" %>
+    <% end %>
+  </div>
+  <div id="nav" style="display: none;">
+    <ul>
+      <li>
+        <%= link_to 'home', bars_path %>
+      </li>
+      <% if user_signed_in? %>
+      <li>
+        <%= link_to 'my favorites',favorites_path %>
+      </li>
       <% end %>
-
-      <div class="hamburger"><a><img id="burgerIcon" src='/assets/hamburger.png' width="63" onclick="toggleNav()"></a></div>
-
-    </div>
-
-    <div class="bar-buttons-container">
-      <% if request.env['PATH_INFO'] == "/" %>
-
+      <% if user_signed_in? && current_user.type == 'Owner' %>
+      <!-- <li>my bars</li> -->
       <% end %>
-    </div>
-
-    <div id="nav" style="display: none;">
-        <ul>
-          <li><%= link_to 'home', bars_path %></li>
-
-          <% if user_signed_in? %>
-            <li><%= link_to 'my favorites',favorites_path %></li>
-          <% end %>
-
-          <% if user_signed_in? && current_user.type == 'Owner' %>
-            <!-- <li>my bars</li> -->
-          <% end %>
-
-          <% if user_signed_in? %>
-            <li><%= link_to 'logout', destroy_user_session_url, method: :delete %></li>
-          <% else %>
-            <li><%= link_to 'login', new_user_session_url %></li>
-          <% end %>
-        </ul>
-    </div>
-
-    <div id="options" style="display: none;">
-      <ul class="options-vertical-list">
-        <li class="options-header">filter by</li>
-        <li>
-          <ul class="options-filter-list">
-            <li style="float: left; margin-top: 15px;">
-              <span class="span-style">Distance</span>
-              <span class="span-style" style="margin-left: -6px;">
-                <%= select_tag(:filterDistance, options_for_select([
+      <% if user_signed_in? %>
+      <li>
+        <%= link_to 'logout', destroy_user_session_url, method: :delete %>
+      </li>
+      <% else %>
+      <li>
+        <%= link_to 'login', new_user_session_url %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div id="options" style="display: none;">
+    <ul class="options-vertical-list">
+      <li class="options-header">filter by</li>
+      <li>
+        <ul class="options-filter-list">
+          <li style="float: left; margin-top: 15px;">
+            <span class="span-style">Distance</span>
+            <span class="span-style" style="margin-left: -6px;">
+              <%= select_tag(:filterDistance, options_for_select([
                   ['Show all            ', 1],
                   ['Less than 1km      ', 2],
                   ['Less than 5km       ', 3],
                   ['More than 10km       ', 4]
                 ])) %></span>
-            </li>
-            <li style="float: right; margin-top: 15px;">
-              <span class="span-style">Price</span>
-              <span class="span-style" style="margin-left: -6px;">
-                <%= select_tag(:filterPrice, options_for_select([
+          </li>
+          <li style="float: right; margin-top: 15px;">
+            <span class="span-style">Price</span>
+            <span class="span-style" style="margin-left: -6px;">
+              <%= select_tag(:filterPrice, options_for_select([
                   ['Show all            ', 1],
                   ['Less than $10       ', 2],
                   ['Less than $20       ', 3],
                   ['More than $20       ', 4]
                 ])) %>
-              </span>
-            </li>
-          </ul>
-        </li>
-
-        <li class="options-header">sort by</li>
-        <li>
-          <ul class="options-sort-list">
-            <li style="float: left; margin-top: 15px; width: 100%;">
-              <span class="span-style">
-                <%= select_tag(:sortBy, options_for_select([
+            </span>
+          </li>
+        </ul>
+      </li>
+      <li class="options-header">sort by</li>
+      <li>
+        <ul class="options-sort-list">
+          <li style="float: left; margin-top: 15px; width: 100%;">
+            <span class="span-style">
+              <%= select_tag(:sortBy, options_for_select([
                   ['Distance', 1],
                   ['Price', 2]
                   ])) %>
-              </span>
-              <span class="span-style" style="margin-left: -6px;">
-                <%= select_tag(:sortValue, options_for_select([
+            </span>
+            <span class="span-style" style="margin-left: -6px;">
+              <%= select_tag(:sortValue, options_for_select([
                   ['From lowest to highest', 1],
                   ['From highest to lowest', 2]
                   ])) %>
-              </span>
-            </li>
-          </ul>
-
-        </li>
-
-        <li><span class="span-style" onclick="filterAndSort()">Submit</span></li>
-      </ul>
-    </div>
-
-
-    <%= yield %>
-
-    <!-- Checks if user is a bar owner -->
-    <% if user_signed_in? && current_user.type == 'Owner' %>
-      <%= link_to 'New Bar', new_bar_path, class: 'btn btn-secondary'  %>
-    <% end %>
-
-  </body>
+            </span>
+          </li>
+        </ul>
+      </li>
+      <li><span class="span-style" onclick="filterAndSort()">Submit</span></li>
+    </ul>
+  </div>
+  <%= yield %>
+  <!-- Checks if user is a bar owner -->
+  <% if user_signed_in? && current_user.type == 'Owner' %>
+  <%= link_to 'New Bar', new_bar_path, class: 'btn btn-secondary'  %>
+  <% end %>
+</body>
 
 </html>

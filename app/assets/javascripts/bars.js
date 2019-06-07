@@ -1,26 +1,35 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
+// document.getElementById('hamburger-icon').addEventListener('click', toggleNav);
+// document.getElementById('close-icon').addEventListener('click', toggleNav);
+
 var toggleNav = function () {
   nav = document.getElementById('nav')
   opt = document.getElementById('options')
-  burger = document.getElementById('burgerIcon')
+  // burger = document.getElementById('burgerIcon')
   // searchIcon = document.getElementById('search-icon')
   optionsIcon = document.getElementById('options-icon')
-  console.log(burger.src)
+  hamburgerIcon = document.getElementById('hamburger-icon')
+  closeIcon = document.getElementById('close-icon')
+  // console.log(burger.src)
   console.log(window.location.origin + '/assets/hamburger.png')
 
-  if (burger.src == window.location.origin + '/assets/hamburger.png') {
+  if (hamburgerIcon.style.display === "block") {
     nav.style.display = 'block'
-    burger.src = window.location.origin + '/assets/close.png'
+    hamburgerIcon.style.display = 'none'
+    closeIcon.style.display = 'block'
+    // burger.src = window.location.origin + '/assets/close.png'
     // searchIcon.style.display = 'none'
     optionsIcon.style.display = 'none'
-  } else if (burger.src == window.location.origin + '/assets/close.png') {
+  } else if (closeIcon.style.display === "block") {
     nav.style.display = 'none'
     opt.style.display = 'none'
+    hamburgerIcon.style.display = 'block'
+    closeIcon.style.display = 'none'
     // searchIcon.style.display = 'block'
     optionsIcon.style.display = 'block'
-    burger.src = window.location.origin + '/assets/hamburger.png'
+    // burger.src = window.location.origin + '/assets/hamburger.png'
   }
 }
 
