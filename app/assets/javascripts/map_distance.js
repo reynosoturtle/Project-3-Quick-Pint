@@ -36,10 +36,10 @@ if (window.location.pathname == '/bars' || window.location.pathname == '/') {
             barCoords[i].style.visibility = 'visible';
 
             // clear loader here
-            // if (i == barCoords.length - 1) {
-            //   console.log('done loading')
-            //   document.getElementById('loader').style.display = "none"
-            // }
+            if (i == barCoords.length - 1) {
+              console.log('done loading')
+              document.getElementById('loader').style.display = "none"
+            }
         }
     })
 }

@@ -14,7 +14,7 @@
   <!-- Loader -->
   <% if request.env['PATH_INFO'] == "/" ||
             request.env['PATH_INFO'] == "/bars" %>
-  <div id="loader" style="display: none;">
+  <div id="loader" style="display: block;">
     <%= image_tag('loader.gif', class: "absolute-center" ) %>
   </div>
   <% end %>
@@ -37,10 +37,17 @@
         <!-- <img id="burgerIcon" src='/assets/hamburger.png' width="63" onclick="toggleNav()"> -->
         <%= image_tag 'hamburger.png', width: 63 %>
       </a></div>
-      <div id="close-icon" class="close" style="display: none;" onclick="toggleNav()"><a>
+    <div id="close-icon" class="close" style="display: none;" onclick="toggleNav()"><a>
         <!-- <img id="burgerIcon" src='/assets/hamburger.png' width="63" onclick="toggleNav()"> -->
         <%= image_tag 'close.png', width: 63 %>
       </a></div>
+    <!-- Checks if user is a bar owner -->
+    <% if user_signed_in? && current_user.type == 'Owner' && request.env['PATH_INFO'] == "/" %>
+    <div id="new-bar">
+      <span class="span-style" style="margin-left: 10px; position: absolute; font-size: 21px;">
+        <%= link_to 'New Bar', new_bar_path, class: 'btn btn-secondary'  %></span>
+    </div>
+    <% end %>
   </div>
   <div class="bar-buttons-container">
     <% if request.env['PATH_INFO'] == "/" %>
@@ -121,10 +128,6 @@
     </ul>
   </div>
   <%= yield %>
-  <!-- Checks if user is a bar owner -->
-  <% if user_signed_in? && current_user.type == 'Owner' %>
-  <%= link_to 'New Bar', new_bar_path, class: 'btn btn-secondary'  %>
-  <% end %>
 </body>
 
 </html>
